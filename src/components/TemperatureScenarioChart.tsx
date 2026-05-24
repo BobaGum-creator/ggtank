@@ -49,6 +49,27 @@ export function TemperatureScenarioChart() {
   const [rateOverride, setRateOverride] = useState<number | null>(null);
   const rate = rateOverride ?? autoRate;
 
+  const resetDefaults = () => {
+    setStartTempF(SCENARIO_DEFAULTS.startTempF);
+    setPreviousTempF(SCENARIO_DEFAULTS.previousTempF);
+    setHoursBetween(SCENARIO_DEFAULTS.hoursBetweenReadings);
+    setAmbientTempF(SCENARIO_DEFAULTS.ambientTempF);
+    setCoolingPct(SCENARIO_DEFAULTS.coolingEffectiveness);
+    setAccelerationFactor(SCENARIO_DEFAULTS.accelerationFactor);
+    setHorizon(SCENARIO_DEFAULTS.defaultHorizonHours);
+    setRateOverride(null);
+  };
+
+  const isDirty =
+    startTempF !== SCENARIO_DEFAULTS.startTempF ||
+    previousTempF !== SCENARIO_DEFAULTS.previousTempF ||
+    hoursBetween !== SCENARIO_DEFAULTS.hoursBetweenReadings ||
+    ambientTempF !== SCENARIO_DEFAULTS.ambientTempF ||
+    coolingPct !== SCENARIO_DEFAULTS.coolingEffectiveness ||
+    accelerationFactor !== SCENARIO_DEFAULTS.accelerationFactor ||
+    horizon !== SCENARIO_DEFAULTS.defaultHorizonHours ||
+    rateOverride !== null;
+
   const { points } = useMemo(
     () =>
       simulateTemperatureScenarios({
@@ -87,7 +108,17 @@ export function TemperatureScenarioChart() {
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         {/* Controls */}
         <div className="min-w-0 space-y-4">
-          <h3 className="text-sm font-semibold text-slate-900">Assumptions</h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-slate-900">Assumptions</h3>
+            <button
+              type="button"
+              onClick={resetDefaults}
+              disabled={!isDirty}
+              className="inline-flex items-center gap-1 rounded-md border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-600 hover:border-brand-600 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <span aria-hidden="true">↺</span> Reset
+            </button>
+          </div>
           <AssumptionControl
             label="Starting temperature"
             value={startTempF}
