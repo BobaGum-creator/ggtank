@@ -443,11 +443,11 @@ export const es: Translation = {
     shareScenario: "Compartir este escenario",
     revisitAt: "Comparta o vuelva a esta página en",
     message:
-      "GG Tank Science Dashboard — una estimación transparente y consciente de la incertidumbre. No es orientación oficial; siga las órdenes oficiales.",
+      "GKN Aerospace MMA Tank — Garden Grove — una estimación transparente y consciente de la incertidumbre. No es orientación oficial; siga las órdenes oficiales.",
   },
 
   footer: {
-    line1Brand: "GG Tank Science Dashboard.",
+    line1Brand: "GKN Aerospace MMA Tank — Garden Grove.",
     line1:
       " Un proyecto educativo independiente y de código abierto. No está afiliado a OCFA, GKN Aerospace, la Ciudad de Garden Grove, la EPA ni Cal OES. No determina si alguna dirección es segura.",
     line2:
