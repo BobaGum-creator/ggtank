@@ -27,6 +27,13 @@ export const LANGUAGES: { code: Lang; label: string }[] = [
   { code: "vi", label: vi.langName },
 ];
 
+/** BCP-47 locales for Intl date formatting per language. */
+export const LOCALES: Record<Lang, string> = {
+  en: "en-US",
+  es: "es",
+  vi: "vi",
+};
+
 const STORAGE_KEY = "ggtank-lang";
 
 function isLang(value: string | null): value is Lang {

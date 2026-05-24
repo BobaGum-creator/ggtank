@@ -7,7 +7,7 @@ import { observations } from "../data/observations";
 import { timelineEvents } from "../data/timeline";
 import { sourceById } from "../data/sources";
 import { formatDateOnly, formatTimestamp } from "../lib/format";
-import { useT } from "../i18n";
+import { LOCALES, useLanguage } from "../i18n";
 import { Badge, Card, WhatThisMeans } from "./ui";
 
 type RowKind = "incident" | "official" | "report" | "reading";
@@ -38,7 +38,8 @@ const KIND_TONE: Record<RowKind, "caution" | "watch" | "neutral" | "info"> = {
 };
 
 export function Timeline() {
-  const t = useT();
+  const { t, lang } = useLanguage();
+  const locale = LOCALES[lang];
 
   const kindLabel: Record<RowKind, string> = {
     incident: t.timeline.kind.incident,
@@ -52,12 +53,12 @@ export function Timeline() {
   for (const o of observations) {
     rows.push({
       ms: new Date(o.timestamp).getTime(),
-      when: formatTimestamp(o.timestamp),
+      when: formatTimestamp(o.timestamp, locale),
       kind: "reading",
       title: t.timeline.readingTitle(o.tempF),
       detail: t.timeline.observationLabels[o.label] ?? o.label,
-      sourceLabel: o.source,
-      confidence: o.confidence,
+      sourceLabel: t.timeline.observationSources[o.source] ?? o.source,
+      confidence: t.timeline.confidence[o.confidence] ?? o.confidence,
     });
   }
 
@@ -66,7 +67,7 @@ export function Timeline() {
     const tr = t.timeline.events[e.id];
     rows.push({
       ms: new Date(e.timestamp).getTime(),
-      when: e.timeKnown ? formatTimestamp(e.timestamp) : formatDateOnly(e.timestamp),
+      when: e.timeKnown ? formatTimestamp(e.timestamp, locale) : formatDateOnly(e.timestamp, locale),
       kind: e.kind,
       title: tr?.title ?? e.title,
       detail: tr?.detail ?? e.detail,

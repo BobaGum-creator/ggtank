@@ -7,12 +7,12 @@ import { officialChannels } from "../data/sources";
 import { lastDataUpdate } from "../data/observations";
 import { formatTimestamp } from "../lib/format";
 import { siteBaseUrl, siteDisplayUrl } from "../lib/shareUrl";
-import { useT } from "../i18n";
+import { LOCALES, useLanguage } from "../i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function EmergencyBanner() {
-  const t = useT();
-  const updated = formatTimestamp(lastDataUpdate());
+  const { t, lang } = useLanguage();
+  const updated = formatTimestamp(lastDataUpdate(), LOCALES[lang]);
 
   return (
     <header className="border-b border-slate-200 bg-white">
@@ -57,7 +57,7 @@ export function EmergencyBanner() {
                   href={c.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  title={c.role}
+                  title={t.banner.channelRoles[c.name] ?? c.role}
                   className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:border-brand-600 hover:text-brand-700"
                 >
                   {c.name}
