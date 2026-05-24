@@ -442,11 +442,11 @@ export const vi: Translation = {
     shareScenario: "Chia sẻ kịch bản này",
     revisitAt: "Chia sẻ hoặc xem lại trang này tại",
     message:
-      "GG Tank Science Dashboard — một ước tính minh bạch, lưu ý sự bất định. Không phải hướng dẫn chính thức; hãy tuân theo lệnh chính thức.",
+      "GKN Aerospace MMA Tank — Garden Grove — một ước tính minh bạch, lưu ý sự bất định. Không phải hướng dẫn chính thức; hãy tuân theo lệnh chính thức.",
   },
 
   footer: {
-    line1Brand: "GG Tank Science Dashboard.",
+    line1Brand: "GKN Aerospace MMA Tank — Garden Grove.",
     line1:
       " Một dự án giáo dục độc lập, mã nguồn mở. Không liên kết với OCFA, GKN Aerospace, Thành phố Garden Grove, EPA hay Cal OES. Trang không xác định bất kỳ địa chỉ nào là an toàn.",
     line2:

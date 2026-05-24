@@ -453,11 +453,11 @@ export const en = {
     shareScenario: "Share this scenario",
     revisitAt: "Share or revisit this page at",
     message:
-      "GG Tank Science Dashboard — a transparent, uncertainty-aware estimate. Not official guidance; follow official orders.",
+      "GKN Aerospace MMA Tank — Garden Grove — a transparent, uncertainty-aware estimate. Not official guidance; follow official orders.",
   },
 
   footer: {
-    line1Brand: "GG Tank Science Dashboard.",
+    line1Brand: "GKN Aerospace MMA Tank — Garden Grove.",
     line1:
       " An independent, open-source educational project. Not affiliated with OCFA, GKN Aerospace, the City of Garden Grove, EPA, or Cal OES. It does not determine whether any address is safe.",
     line2:

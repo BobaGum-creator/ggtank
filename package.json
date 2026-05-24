@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "GG Tank Science Dashboard — a transparent, uncertainty-aware public-education estimate for the Garden Grove MMA tank incident. Not official guidance.",
+  "description": "GKN Aerospace MMA Tank — Garden Grove: a transparent, uncertainty-aware public-education estimate for the MMA tank incident. Not official guidance.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

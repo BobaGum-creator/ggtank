@@ -44,7 +44,7 @@ export function ShareButtons({ getUrl, text, size = "md" }: ShareButtonsProps) {
   const onNativeShare = async () => {
     const url = getUrl();
     try {
-      await navigator.share({ title: "GG Tank Science Dashboard", text, url });
+      await navigator.share({ title: "GKN Aerospace MMA Tank — Garden Grove", text, url });
     } catch {
       // User dismissed the share sheet, or it failed — no action needed.
     }

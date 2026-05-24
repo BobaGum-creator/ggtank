@@ -20,7 +20,7 @@ export function EmergencyBanner() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-1">
             <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-              GG Tank Science Dashboard
+              GKN Aerospace MMA Tank — Garden Grove
             </h1>
             <p className="text-base font-medium text-brand-700">{t.banner.subtitle}</p>
             <a
