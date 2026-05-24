@@ -22,6 +22,7 @@ uncertainty-aware estimates.
   every assumption yourself.
 - Surfaces **uncertainty everywhere** — ranges, assumptions, and an explicit
   "Known Unknowns" list — instead of false precision.
+- Includes a **FAQ** and a plain-language **glossary** (also fully translated).
 - Cites a **public source** for every fact, constant, and threshold.
 
 ## What this site does **not** do

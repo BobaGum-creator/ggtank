@@ -6,6 +6,8 @@ import { CompositionEstimator } from "./components/CompositionEstimator";
 import { VaporPressureChart } from "./components/VaporPressureChart";
 import { PlumeExplainer } from "./components/PlumeExplainer";
 import { KnownUnknowns } from "./components/KnownUnknowns";
+import { Faq } from "./components/Faq";
+import { Glossary } from "./components/Glossary";
 import { SourcesPanel } from "./components/SourcesPanel";
 import { Section } from "./components/ui";
 import { ShareButtons } from "./components/ShareButtons";
@@ -25,6 +27,8 @@ function App() {
     { id: "pressure", label: t.nav.pressure },
     { id: "plume", label: t.nav.plume },
     { id: "unknowns", label: t.nav.unknowns },
+    { id: "faq", label: t.nav.faq },
+    { id: "glossary", label: t.nav.glossary },
     { id: "sources", label: t.nav.sources },
   ];
 
@@ -132,6 +136,24 @@ function App() {
           intro={t.sections.unknowns.intro}
         >
           <KnownUnknowns />
+        </Section>
+
+        <Section
+          id="faq"
+          eyebrow={t.sections.faq.eyebrow}
+          title={t.sections.faq.title}
+          intro={t.sections.faq.intro}
+        >
+          <Faq />
+        </Section>
+
+        <Section
+          id="glossary"
+          eyebrow={t.sections.glossary.eyebrow}
+          title={t.sections.glossary.title}
+          intro={t.sections.glossary.intro}
+        >
+          <Glossary />
         </Section>
 
         <Section

@@ -39,6 +39,8 @@ export const vi: Translation = {
     pressure: "Áp suất",
     plume: "Luồng khí",
     unknowns: "Ẩn số",
+    faq: "Hỏi đáp",
+    glossary: "Thuật ngữ",
     sources: "Nguồn",
   },
 
@@ -84,6 +86,17 @@ export const vi: Translation = {
       title: "Những ẩn số đã biết",
       intro:
         "Những biến số cần thiết cho bất kỳ đánh giá thực sự nào, và hiện không được công khai.",
+    },
+    faq: {
+      eyebrow: "Câu hỏi",
+      title: "Câu hỏi thường gặp",
+      intro:
+        "Giải đáp đơn giản cho các câu hỏi phổ biến. Không câu nào cho bạn biết một địa điểm có an toàn hay không — chỉ cơ quan chức năng mới có thể.",
+    },
+    glossary: {
+      eyebrow: "Ngôn ngữ đơn giản",
+      title: "Thuật ngữ",
+      intro: "Định nghĩa ngắn gọn các thuật ngữ chính dùng trên trang này.",
     },
     sources: {
       eyebrow: "Minh bạch",
@@ -348,6 +361,59 @@ export const vi: Translation = {
       tempCurves: "Các đường nhiệt độ là kịch bản số học, không phải dự báo",
       conversion: "Tỷ lệ chuyển đổi là năng lượng tương đương, không phải thành phần đo được",
     },
+  },
+
+  faq: {
+    items: [
+      {
+        q: "Đây có phải trang chính thức không? Nó có cho tôi biết nhà tôi có an toàn không?",
+        a: "Không. Đây là một dự án giáo dục độc lập, không liên kết với bất kỳ cơ quan nào, và không thể xác định bất kỳ địa chỉ nào là an toàn. Chỉ lực lượng ứng phó chính thức mới có thể. Hãy theo dõi OCFA, Thành phố Garden Grove, Cal OES, EPA và Cơ quan Y tế Quận Cam.",
+      },
+      {
+        q: "Methyl methacrylate (MMA) là gì?",
+        a: "Một chất lỏng không màu, dễ cháy, dùng để sản xuất nhựa PMMA (acrylic). Ở nhiệt độ thường, nó chủ yếu ở thể lỏng với hơi phía trên, và có thể polymer hóa — liên kết hóa học thành chất rắn — đồng thời tỏa nhiệt.",
+      },
+      {
+        q: "Vì sao nhiệt độ lại đáng lo đến vậy? Chẳng phải chỉ là nhiệt thôi sao?",
+        a: "Mối lo không chỉ là nhiệt thông thường. Nếu MMA bắt đầu polymer hóa, chính phản ứng đó tỏa nhiệt. Nếu nhiệt này vượt quá khả năng làm mát hoặc làm tắc lối thoát hơi, áp suất và nguy cơ nứt vỡ có thể tăng. Vì vậy lực lượng ứng phó đang làm mát bồn.",
+      },
+      {
+        q: "Không khí có mùi hắc hoặc giống tiệm làm móng. Điều đó có nguy hiểm không?",
+        a: "Mùi không phải là phép đo an toàn — bạn có thể ngửi thấy MMA ở mức thấp hơn hoặc cao hơn nhiều so với mức đáng kể, nên mũi không phải thước đo nguy cơ đáng tin. Hãy dựa vào việc giám sát không khí chính thức theo thời gian thực và mọi hướng dẫn y tế.",
+      },
+      {
+        q: "Bồn có nổ không?",
+        a: "Điều đó chưa biết. Một vụ nứt vỡ dữ dội là mối nguy được công nhận nếu polymer hóa mất kiểm soát, nhưng không ai có thể dự đoán công khai liệu hay khi nào điều đó xảy ra — thông tin cần thiết không có sẵn (xem Những ẩn số đã biết). Dù sao cũng hãy tuân theo lệnh sơ tán.",
+      },
+      {
+        q: "Dữ liệu trên trang này cập nhật đến mức nào?",
+        a: "Trang hiển thị số liệu được báo cáo kèm mốc thời gian (xem Dòng thời gian), không phải dữ liệu trực tiếp, và chưa được kiểm chứng độc lập. Về tình hình hiện tại, hãy luôn dùng các kênh chính thức.",
+      },
+      {
+        q: "Vì sao trang không đưa ra câu trả lời chính xác?",
+        a: "Vì những biến số quan trọng nhất — áp suất thực, tình trạng van, mức chất ức chế, các điểm nóng bên trong và hơn nữa — không được công khai. Đưa con số chính xác sẽ là sự chính xác giả tạo. Các công cụ ở đây nhằm hiểu cơ chế và khoảng giá trị, không phải dự đoán.",
+      },
+      {
+        q: "Làm sao để nhận cảnh báo chính thức?",
+        a: "Hãy dùng các nguồn chính thức được liên kết ở đầu trang này và đăng ký nhận cảnh báo khẩn cấp của quận bạn. Các cơ quan đó mới đưa ra quyết định sơ tán, trú ẩn và quay trở lại.",
+      },
+    ],
+  },
+
+  glossary: {
+    items: [
+      { term: "Methyl methacrylate (MMA)", def: "Hóa chất trong bồn (CAS 80-62-6): một monomer lỏng không màu, dễ cháy, dùng để sản xuất nhựa acrylic." },
+      { term: "Monomer", def: "Một phân tử nhỏ có thể kết hợp với nhiều bản sao của chính nó để tạo thành polymer. MMA là monomer; PMMA là polymer." },
+      { term: "Polymer hóa", def: "Phản ứng liên kết các phân tử monomer thành chuỗi dài (một polymer). Với MMA, nó tỏa nhiệt (tỏa nhiệt)." },
+      { term: "PMMA / acrylic", def: "Poly(methyl methacrylate) — loại nhựa rắn (acrylic, ví dụ Plexiglas) mà MMA tạo thành khi polymer hóa." },
+      { term: "Tỏa nhiệt", def: "Một phản ứng giải phóng nhiệt. Polymer hóa tỏa nhiệt mất kiểm soát là mối lo trung tâm với bồn này." },
+      { term: "Chất ức chế (chất ổn định)", def: "Một phụ gia kìm hãm polymer hóa không mong muốn trong quá trình lưu trữ. Nếu nó cạn hoặc bị vượt quá, nguy cơ phản ứng tăng." },
+      { term: "Áp suất hơi", def: "Áp suất của hơi ở trạng thái cân bằng với chất lỏng tại một nhiệt độ nhất định. Nó tăng theo nhiệt độ — nhưng KHÔNG giống áp suất tổng bên trong bồn." },
+      { term: "Khoảng trống đầu bồn", def: "Khoảng chứa hơi phía trên chất lỏng bên trong bồn." },
+      { term: "Đoạn nhiệt", def: "Một trường hợp lý tưởng trong đó không có nhiệt nào bị loại bỏ. Giả định 'không loại bỏ nhiệt' của bộ ước tính là đoạn nhiệt; việc làm mát thực tế làm thay đổi bức tranh thật." },
+      { term: "Luồng hơi", def: "Một đám hơi bị gió cuốn đi. Đường đi của nó phụ thuộc gió, địa hình và công trình, nên không phải đường thẳng cũng không phải vòng tròn hoàn hảo." },
+      { term: "Tái ổn định", def: "Thêm chất ức chế trở lại bồn lớn để lấy lại sự ổn định. Hướng dẫn lưu ý điều này ở khoảng 45°C / 113°F." },
+    ],
   },
 
   share: {

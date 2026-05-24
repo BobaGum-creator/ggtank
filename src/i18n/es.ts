@@ -40,6 +40,8 @@ export const es: Translation = {
     pressure: "Presión",
     plume: "Pluma",
     unknowns: "Incógnitas",
+    faq: "Preguntas",
+    glossary: "Glosario",
     sources: "Fuentes",
   },
 
@@ -85,6 +87,17 @@ export const es: Translation = {
       title: "Incógnitas conocidas",
       intro:
         "Las variables que se requerirían para cualquier evaluación genuina y que no se conocen públicamente.",
+    },
+    faq: {
+      eyebrow: "Preguntas",
+      title: "Preguntas frecuentes",
+      intro:
+        "Respuestas claras a preguntas comunes. Ninguna le dice si un lugar es seguro — solo las autoridades pueden.",
+    },
+    glossary: {
+      eyebrow: "Lenguaje sencillo",
+      title: "Glosario",
+      intro: "Definiciones breves de los términos clave usados en esta página.",
     },
     sources: {
       eyebrow: "Transparencia",
@@ -349,6 +362,59 @@ export const es: Translation = {
       tempCurves: "Las curvas de temperatura son escenarios aritméticos, no pronósticos",
       conversion: "La fracción de conversión es energía equivalente, no una composición medida",
     },
+  },
+
+  faq: {
+    items: [
+      {
+        q: "¿Es este un sitio oficial? ¿Puede decirme si mi casa es segura?",
+        a: "No. Este es un proyecto educativo independiente, no afiliado a ninguna agencia, y no puede determinar si alguna dirección es segura. Solo los equipos de respuesta oficiales pueden. Siga a OCFA, la Ciudad de Garden Grove, Cal OES, la EPA y la Agencia de Salud del Condado de Orange.",
+      },
+      {
+        q: "¿Qué es el metacrilato de metilo (MMA)?",
+        a: "Un líquido incoloro e inflamable usado para fabricar plástico PMMA (acrílico). A temperaturas normales es mayormente líquido con vapor encima, y puede polimerizarse —unirse químicamente hasta formar un sólido— liberando calor.",
+      },
+      {
+        q: "¿Por qué preocupa tanto la temperatura? ¿No es solo calor?",
+        a: "La preocupación no es solo el calor común. Si el MMA empieza a polimerizarse, la propia reacción libera calor. Si ese calor supera al enfriamiento o bloquea la ventilación, la presión y el riesgo de ruptura pueden aumentar. Por eso los equipos están enfriando el tanque.",
+      },
+      {
+        q: "El aire huele fuerte o como a salón de uñas. ¿Es peligroso?",
+        a: "El olor no es una medición de seguridad —puede oler MMA en niveles muy por debajo o por encima de lo que importa, así que su nariz no es un indicador fiable del riesgo. Confíe en el monitoreo oficial del aire en tiempo real y en cualquier guía de salud.",
+      },
+      {
+        q: "¿Explotará el tanque?",
+        a: "Eso es desconocido. Una ruptura violenta es un peligro reconocido si la polimerización se descontrola, pero nadie puede predecir públicamente si ocurrirá o cuándo —la información necesaria no está disponible (vea Incógnitas conocidas). Siga las órdenes de evacuación de todos modos.",
+      },
+      {
+        q: "¿Qué tan actuales son los datos de este sitio?",
+        a: "Muestra cifras reportadas con marcas de tiempo (vea la Cronología), no un flujo en vivo, y no están verificadas de forma independiente. Para la situación actual, use siempre los canales oficiales.",
+      },
+      {
+        q: "¿Por qué el sitio no da respuestas exactas?",
+        a: "Porque las variables más importantes —presión real, estado de las válvulas, nivel de inhibidor, puntos calientes internos y más— no se conocen públicamente. Dar cifras exactas sería falsa precisión. Las herramientas aquí sirven para entender mecanismos y rangos, no predicciones.",
+      },
+      {
+        q: "¿Cómo recibo alertas oficiales?",
+        a: "Use las fuentes oficiales enlazadas en la parte superior de esta página y regístrese para las alertas de emergencia de su condado. Esas autoridades toman las decisiones de evacuación, refugio y reingreso.",
+      },
+    ],
+  },
+
+  glossary: {
+    items: [
+      { term: "Metacrilato de metilo (MMA)", def: "El químico del tanque (CAS 80-62-6): un monómero líquido incoloro e inflamable usado para fabricar plástico acrílico." },
+      { term: "Monómero", def: "Una molécula pequeña que puede unirse con muchas copias de sí misma para formar un polímero. El MMA es el monómero; el PMMA es el polímero." },
+      { term: "Polimerización", def: "La reacción que une moléculas de monómero en cadenas largas (un polímero). Para el MMA libera calor (es exotérmica)." },
+      { term: "PMMA / acrílico", def: "Poli(metacrilato de metilo) — el plástico sólido (acrílico, p. ej. Plexiglás) que forma el MMA al polimerizarse." },
+      { term: "Exotérmico", def: "Una reacción que libera calor. La polimerización exotérmica descontrolada es la preocupación central con este tanque." },
+      { term: "Inhibidor (estabilizador)", def: "Un aditivo que suprime la polimerización no deseada durante el almacenamiento. Si se agota o se ve superado, el riesgo de reacción aumenta." },
+      { term: "Presión de vapor", def: "La presión del vapor en equilibrio con el líquido a una temperatura dada. Aumenta con la temperatura — pero NO es lo mismo que la presión total dentro del tanque." },
+      { term: "Espacio de cabeza", def: "El espacio lleno de vapor por encima del líquido dentro del tanque." },
+      { term: "Adiabático", def: "Un caso idealizado en el que no se retira calor. El supuesto del estimador de 'sin calor removido' es adiabático; el enfriamiento real cambia el panorama." },
+      { term: "Pluma", def: "Una nube de vapor arrastrada por el viento. Su trayectoria depende del viento, el terreno y los edificios, así que no es una línea recta ni un círculo perfecto." },
+      { term: "Reestabilización", def: "Volver a añadir inhibidor a un tanque a granel para recuperar estabilidad. La guía la señala a unos 45°C / 113°F." },
+    ],
   },
 
   share: {
