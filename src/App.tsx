@@ -1,5 +1,6 @@
 import { EmergencyBanner } from "./components/EmergencyBanner";
 import { SummaryCards } from "./components/SummaryCards";
+import { Timeline } from "./components/Timeline";
 import { TemperatureScenarioChart } from "./components/TemperatureScenarioChart";
 import { CompositionEstimator } from "./components/CompositionEstimator";
 import { VaporPressureChart } from "./components/VaporPressureChart";
@@ -11,6 +12,7 @@ import { INCIDENT } from "./data/constants";
 
 const NAV = [
   { id: "summary", label: "Summary" },
+  { id: "timeline", label: "Timeline" },
   { id: "temperature", label: "Temperature" },
   { id: "composition", label: "Composition" },
   { id: "pressure", label: "Pressure" },
@@ -70,6 +72,15 @@ function App() {
           }
         >
           <SummaryCards />
+        </Section>
+
+        <Section
+          id="timeline"
+          eyebrow="Reported chronology"
+          title="Timeline of reported data points"
+          intro="When each reported temperature reading and incident event occurred, in order. These are reported times from public sources, not independently verified."
+        >
+          <Timeline />
         </Section>
 
         <Section
