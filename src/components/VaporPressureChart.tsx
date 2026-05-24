@@ -37,7 +37,7 @@ export function VaporPressureChart() {
     <Card>
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Chart */}
-        <div>
+        <div className="min-w-0">
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>

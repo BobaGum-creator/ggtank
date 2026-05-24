@@ -100,7 +100,7 @@ export function CompositionEstimator() {
     <Card>
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         {/* Controls */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <h3 className="text-sm font-semibold text-slate-900">Assumptions</h3>
           <AssumptionControl label="Volume — minimum" value={volMin} min={1000} max={34000} step={500} unit="gal" onChange={setVolMin} />
           <AssumptionControl label="Volume — likely" value={volMid} min={1000} max={34000} step={500} unit="gal" onChange={setVolMid} />
@@ -140,7 +140,7 @@ export function CompositionEstimator() {
         </div>
 
         {/* Output */}
-        <div>
+        <div className="min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
             <div>
               <p className="text-xs uppercase tracking-wide text-slate-500">

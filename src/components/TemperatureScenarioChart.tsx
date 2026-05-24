@@ -86,7 +86,7 @@ export function TemperatureScenarioChart() {
     <Card>
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         {/* Controls */}
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <h3 className="text-sm font-semibold text-slate-900">Assumptions</h3>
           <AssumptionControl
             label="Starting temperature"
@@ -191,7 +191,7 @@ export function TemperatureScenarioChart() {
         </div>
 
         {/* Chart */}
-        <div>
+        <div className="min-w-0">
           <div className="h-[420px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={points} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
