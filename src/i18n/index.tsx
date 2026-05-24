@@ -33,9 +33,11 @@ function isLang(value: string | null): value is Lang {
   return value === "en" || value === "es" || value === "vi";
 }
 
-/** Saved choice → browser language → English. */
+/** URL ?lang → saved choice → browser language → English. */
 function detectInitialLang(): Lang {
   if (typeof window === "undefined") return "en";
+  const fromUrl = new URLSearchParams(window.location.search).get("lang");
+  if (isLang(fromUrl)) return fromUrl;
   const saved = window.localStorage.getItem(STORAGE_KEY);
   if (isLang(saved)) return saved;
   const nav = window.navigator.language?.toLowerCase() ?? "";

@@ -8,11 +8,14 @@ import { PlumeExplainer } from "./components/PlumeExplainer";
 import { KnownUnknowns } from "./components/KnownUnknowns";
 import { SourcesPanel } from "./components/SourcesPanel";
 import { Section } from "./components/ui";
+import { ShareButtons } from "./components/ShareButtons";
 import { INCIDENT } from "./data/constants";
-import { useT } from "./i18n";
+import { useLanguage } from "./i18n";
+import { siteBaseUrl, siteDisplayUrl } from "./lib/shareUrl";
 
 function App() {
-  const t = useT();
+  const { t, lang } = useLanguage();
+  const siteShareUrl = () => `${siteBaseUrl()}?lang=${lang}`;
 
   const NAV = [
     { id: "summary", label: t.nav.summary },
@@ -149,6 +152,18 @@ function App() {
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-700">
               {t.share.body}
             </p>
+            <div className="mt-4">
+              <ShareButtons getUrl={siteShareUrl} text={t.share.message} />
+            </div>
+            <p className="mt-3 text-xs text-slate-600">
+              {t.share.revisitAt}:{" "}
+              <a
+                href={siteBaseUrl()}
+                className="font-medium text-brand-700 underline decoration-brand-200 underline-offset-2 hover:decoration-brand-600"
+              >
+                {siteDisplayUrl()}
+              </a>
+            </p>
           </div>
         </section>
       </main>
@@ -160,6 +175,14 @@ function App() {
             {t.footer.line1}
           </p>
           <p className="mt-2">{t.footer.line2}</p>
+          <p className="mt-3">
+            <a
+              href={siteBaseUrl()}
+              className="font-semibold text-slate-600 underline decoration-slate-300 underline-offset-2 hover:text-brand-700"
+            >
+              {siteDisplayUrl()}
+            </a>
+          </p>
         </div>
       </footer>
     </div>

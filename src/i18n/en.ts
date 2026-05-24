@@ -365,6 +365,13 @@ export const en = {
     title: "Share this responsibly",
     body:
       "This dashboard is for understanding mechanisms and uncertainty. Do not use it to override official evacuation, shelter, or re-entry orders. If you share it, share it together with the official sources at the top of the page — and make clear it is an independent educational estimate, not guidance from any agency.",
+    copyLink: "Copy link",
+    copied: "Copied!",
+    share: "Share",
+    shareScenario: "Share this scenario",
+    revisitAt: "Share or revisit this page at",
+    message:
+      "GG Tank Science Dashboard — a transparent, uncertainty-aware estimate. Not official guidance; follow official orders.",
   },
 
   footer: {

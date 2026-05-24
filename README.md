@@ -51,6 +51,11 @@ EPA, and the Orange County Health Care Agency.**
 - **Multilingual**: English, Spanish (Español), and Vietnamese (Tiếng Việt), with
   a language switcher in the header. The choice is saved in `localStorage` and the
   default follows the browser language.
+- **Shareable links**: copy/native-share buttons, plus a deep link that encodes
+  the temperature scenario (and language) in the URL so others open the same view.
+  Every shared link points back to the site, the page carries a URL watermark in
+  the header and footer, and OpenGraph/Twitter meta give shared links a clean
+  preview.
 
 ## Run locally
 
