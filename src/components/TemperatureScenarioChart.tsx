@@ -27,8 +27,10 @@ import {
   thresholdCrossings,
   type ScenarioKey,
 } from "../lib/model";
-import { useT } from "../i18n";
+import { useLanguage } from "../i18n";
+import { buildScenarioUrl, parseScenarioParams } from "../lib/shareUrl";
 import { AssumptionControl } from "./AssumptionControl";
+import { ShareButtons } from "./ShareButtons";
 import { Card, WhatThisMeans } from "./ui";
 
 const SCENARIO_META: { key: ScenarioKey; color: string; dash?: string }[] = [
@@ -38,18 +40,39 @@ const SCENARIO_META: { key: ScenarioKey; color: string; dash?: string }[] = [
 ];
 
 export function TemperatureScenarioChart() {
-  const t = useT();
-  const [startTempF, setStartTempF] = useState<number>(SCENARIO_DEFAULTS.startTempF);
-  const [previousTempF, setPreviousTempF] = useState<number>(SCENARIO_DEFAULTS.previousTempF);
-  const [hoursBetween, setHoursBetween] = useState<number>(SCENARIO_DEFAULTS.hoursBetweenReadings);
-  const [ambientTempF, setAmbientTempF] = useState<number>(SCENARIO_DEFAULTS.ambientTempF);
-  const [coolingPct, setCoolingPct] = useState<number>(SCENARIO_DEFAULTS.coolingEffectiveness);
-  const [accelerationFactor, setAccelerationFactor] = useState<number>(SCENARIO_DEFAULTS.accelerationFactor);
-  const [horizon, setHorizon] = useState<number>(SCENARIO_DEFAULTS.defaultHorizonHours);
+  const { t, lang } = useLanguage();
+  // Restore a shared scenario from the URL on first load (falls back to defaults).
+  const [initial] = useState(() => parseScenarioParams(window.location.search));
+  const [startTempF, setStartTempF] = useState<number>(initial.start ?? SCENARIO_DEFAULTS.startTempF);
+  const [previousTempF, setPreviousTempF] = useState<number>(initial.prev ?? SCENARIO_DEFAULTS.previousTempF);
+  const [hoursBetween, setHoursBetween] = useState<number>(initial.hrs ?? SCENARIO_DEFAULTS.hoursBetweenReadings);
+  const [ambientTempF, setAmbientTempF] = useState<number>(initial.amb ?? SCENARIO_DEFAULTS.ambientTempF);
+  const [coolingPct, setCoolingPct] = useState<number>(initial.cool ?? SCENARIO_DEFAULTS.coolingEffectiveness);
+  const [accelerationFactor, setAccelerationFactor] = useState<number>(initial.acc ?? SCENARIO_DEFAULTS.accelerationFactor);
+  const [horizon, setHorizon] = useState<number>(initial.hz ?? SCENARIO_DEFAULTS.defaultHorizonHours);
 
   const autoRate = ratePerHour(previousTempF, startTempF, hoursBetween);
-  const [rateOverride, setRateOverride] = useState<number | null>(null);
+  const [rateOverride, setRateOverride] = useState<number | null>(initial.rate ?? null);
   const rate = rateOverride ?? autoRate;
+
+  const scenarioShareUrl = () => {
+    const url = buildScenarioUrl(
+      {
+        start: startTempF,
+        prev: previousTempF,
+        hrs: hoursBetween,
+        amb: ambientTempF,
+        cool: coolingPct,
+        acc: accelerationFactor,
+        hz: horizon,
+        rate: rateOverride,
+      },
+      lang,
+    );
+    // Reflect the scenario in the address bar so the copied link matches the view.
+    window.history.replaceState(null, "", url);
+    return url;
+  };
 
   const resetDefaults = () => {
     setStartTempF(SCENARIO_DEFAULTS.startTempF);
@@ -277,6 +300,10 @@ export function TemperatureScenarioChart() {
           <p className="mt-1 text-xs text-slate-500">
             {t.temperature.illustrativeNote(SCENARIO_DEFAULTS.acceleratingCeilingF)}
           </p>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-medium text-slate-600">{t.share.shareScenario}:</span>
+            <ShareButtons size="sm" text={t.share.message} getUrl={scenarioShareUrl} />
+          </div>
         </div>
       </div>
 

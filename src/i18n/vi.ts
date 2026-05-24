@@ -354,6 +354,13 @@ export const vi: Translation = {
     title: "Hãy chia sẻ một cách có trách nhiệm",
     body:
       "Bảng thông tin này nhằm hiểu cơ chế và sự bất định. Đừng dùng nó để bỏ qua các lệnh chính thức về sơ tán, trú ẩn hoặc quay trở lại. Nếu chia sẻ, hãy chia sẻ cùng với các nguồn chính thức ở đầu trang — và nói rõ đây là ước tính giáo dục độc lập, không phải hướng dẫn từ bất kỳ cơ quan nào.",
+    copyLink: "Sao chép liên kết",
+    copied: "Đã sao chép!",
+    share: "Chia sẻ",
+    shareScenario: "Chia sẻ kịch bản này",
+    revisitAt: "Chia sẻ hoặc xem lại trang này tại",
+    message:
+      "GG Tank Science Dashboard — một ước tính minh bạch, lưu ý sự bất định. Không phải hướng dẫn chính thức; hãy tuân theo lệnh chính thức.",
   },
 
   footer: {

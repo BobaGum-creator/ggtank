@@ -6,6 +6,7 @@
 import { officialChannels } from "../data/sources";
 import { lastDataUpdate } from "../data/observations";
 import { formatTimestamp } from "../lib/format";
+import { siteBaseUrl, siteDisplayUrl } from "../lib/shareUrl";
 import { useT } from "../i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -22,6 +23,12 @@ export function EmergencyBanner() {
               GG Tank Science Dashboard
             </h1>
             <p className="text-base font-medium text-brand-700">{t.banner.subtitle}</p>
+            <a
+              href={siteBaseUrl()}
+              className="text-xs font-medium text-slate-400 hover:text-brand-700"
+            >
+              {siteDisplayUrl()}
+            </a>
           </div>
           <div className="flex-none">
             <LanguageSwitcher />

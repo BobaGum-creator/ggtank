@@ -355,6 +355,13 @@ export const es: Translation = {
     title: "Compártalo de forma responsable",
     body:
       "Este panel sirve para entender mecanismos e incertidumbre. No lo use para ignorar las órdenes oficiales de evacuación, refugio o reingreso. Si lo comparte, hágalo junto con las fuentes oficiales que están en la parte superior de la página —y deje claro que es una estimación educativa independiente, no orientación de ninguna agencia.",
+    copyLink: "Copiar enlace",
+    copied: "¡Copiado!",
+    share: "Compartir",
+    shareScenario: "Compartir este escenario",
+    revisitAt: "Comparta o vuelva a esta página en",
+    message:
+      "GG Tank Science Dashboard — una estimación transparente y consciente de la incertidumbre. No es orientación oficial; siga las órdenes oficiales.",
   },
 
   footer: {
