@@ -3,6 +3,7 @@
  * Keeps the section components focused on content rather than markup plumbing.
  */
 import type { ReactNode } from "react";
+import { useT } from "../i18n";
 
 export function Card({
   children,
@@ -55,16 +56,17 @@ export function Section({
 /** Calm, plain-English explainer box placed after charts/figures. */
 export function WhatThisMeans({
   children,
-  title = "What this means",
+  title,
 }: {
   children: ReactNode;
   title?: string;
 }) {
+  const t = useT();
   return (
     <div className="mt-4 rounded-xl border border-brand-100 bg-brand-50 p-4">
       <p className="flex items-center gap-2 text-sm font-semibold text-brand-900">
         <span aria-hidden="true">💡</span>
-        {title}
+        {title ?? t.ui.whatThisMeans}
       </p>
       <div className="mt-1 text-sm leading-relaxed text-slate-700">{children}</div>
     </div>

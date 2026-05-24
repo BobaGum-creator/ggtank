@@ -27,16 +27,18 @@ import {
   thresholdCrossings,
   type ScenarioKey,
 } from "../lib/model";
+import { useT } from "../i18n";
 import { AssumptionControl } from "./AssumptionControl";
 import { Card, WhatThisMeans } from "./ui";
 
-const SCENARIO_META: { key: ScenarioKey; name: string; color: string; dash?: string }[] = [
-  { key: "linear", name: "Linear (constant rate)", color: "#0f766e" },
-  { key: "cooling", name: "Cooling-controlled", color: "#2563eb" },
-  { key: "accelerating", name: "Illustrative runaway-like", color: "#dc2626", dash: "6 4" },
+const SCENARIO_META: { key: ScenarioKey; color: string; dash?: string }[] = [
+  { key: "linear", color: "#0f766e" },
+  { key: "cooling", color: "#2563eb" },
+  { key: "accelerating", color: "#dc2626", dash: "6 4" },
 ];
 
 export function TemperatureScenarioChart() {
+  const t = useT();
   const [startTempF, setStartTempF] = useState<number>(SCENARIO_DEFAULTS.startTempF);
   const [previousTempF, setPreviousTempF] = useState<number>(SCENARIO_DEFAULTS.previousTempF);
   const [hoursBetween, setHoursBetween] = useState<number>(SCENARIO_DEFAULTS.hoursBetweenReadings);
@@ -83,21 +85,17 @@ export function TemperatureScenarioChart() {
     [startTempF, rate, ambientTempF, coolingPct, accelerationFactor, horizon],
   );
 
-  // Y-axis top: focus on the meaningful threshold range; let the accelerating
-  // curve clip (allowDataOverflow) rather than crushing everything else.
   const yTop = useMemo(() => {
-    const maxStable = Math.max(
-      140,
-      ...points.map((p) => Math.max(p.linear, p.cooling)),
-    );
+    const maxStable = Math.max(140, ...points.map((p) => Math.max(p.linear, p.cooling)));
     return Math.min(220, Math.ceil((maxStable + 8) / 10) * 10);
   }, [points]);
+
+  const scenarioName = (key: ScenarioKey) => t.temperature.legend[key];
 
   const crossings = useMemo(
     () =>
       SCENARIO_META.map((m) => ({
         key: m.key,
-        name: m.name,
         rows: thresholdCrossings(points, m.key, TEMPERATURE_THRESHOLDS),
       })),
     [points],
@@ -109,38 +107,38 @@ export function TemperatureScenarioChart() {
         {/* Controls */}
         <div className="min-w-0 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-900">Assumptions</h3>
+            <h3 className="text-sm font-semibold text-slate-900">{t.temperature.assumptions}</h3>
             <button
               type="button"
               onClick={resetDefaults}
               disabled={!isDirty}
               className="inline-flex items-center gap-1 rounded-md border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-600 hover:border-brand-600 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              <span aria-hidden="true">↺</span> Reset
+              <span aria-hidden="true">↺</span> {t.ui.reset}
             </button>
           </div>
           <AssumptionControl
-            label="Starting temperature"
+            label={t.temperature.startTemp}
             value={startTempF}
             min={60}
             max={160}
             step={1}
             unit="°F"
-            help="Most recent reported internal temperature."
+            help={t.temperature.startTempHelp}
             onChange={setStartTempF}
           />
           <AssumptionControl
-            label="Previous known temperature"
+            label={t.temperature.prevTemp}
             value={previousTempF}
             min={50}
             max={160}
             step={1}
             unit="°F"
-            help="An earlier reported reading, used to estimate the rate."
+            help={t.temperature.prevTempHelp}
             onChange={setPreviousTempF}
           />
           <AssumptionControl
-            label="Hours between readings"
+            label={t.temperature.hoursBetween}
             value={hoursBetween}
             min={1}
             max={48}
@@ -150,13 +148,13 @@ export function TemperatureScenarioChart() {
           />
           <div>
             <AssumptionControl
-              label="Observed rate of rise"
+              label={t.temperature.observedRate}
               value={Number(rate.toFixed(2))}
               min={-2}
               max={10}
               step={0.1}
               unit="°F/hr"
-              help="Auto-calculated from the two readings, but you can override it."
+              help={t.temperature.observedRateHelp}
               onChange={setRateOverride}
             />
             {rateOverride !== null && (
@@ -165,43 +163,43 @@ export function TemperatureScenarioChart() {
                 onClick={() => setRateOverride(null)}
                 className="mt-1 text-xs font-medium text-brand-700 underline"
               >
-                Reset to observed ({autoRate.toFixed(2)}°F/hr)
+                {t.ui.resetToObserved(autoRate.toFixed(2))}
               </button>
             )}
           </div>
           <AssumptionControl
-            label="Ambient temperature"
+            label={t.temperature.ambient}
             value={ambientTempF}
             min={40}
             max={110}
             step={1}
             unit="°F"
-            help="Outside air temperature; used by the illustrative cooling-loss term."
+            help={t.temperature.ambientHelp}
             onChange={setAmbientTempF}
           />
           <AssumptionControl
-            label="Cooling effectiveness"
+            label={t.temperature.cooling}
             value={coolingPct}
             min={0}
             max={100}
             step={1}
             unit="%"
-            help="How strongly active cooling damps the rising rate over time. 0% = no damping."
+            help={t.temperature.coolingHelp}
             onChange={setCoolingPct}
           />
           <AssumptionControl
-            label="Acceleration factor"
+            label={t.temperature.acceleration}
             value={accelerationFactor}
             min={0}
             max={0.2}
             step={0.005}
             unit="/hr"
-            help="Drives ONLY the illustrative runaway-like curve. Higher = faster self-heating."
+            help={t.temperature.accelerationHelp}
             onChange={setAccelerationFactor}
           />
           <div>
-            <p className="text-sm font-medium text-slate-700">Simulation horizon</p>
-            <div className="mt-2 flex gap-2" role="group" aria-label="Simulation horizon">
+            <p className="text-sm font-medium text-slate-700">{t.temperature.horizon}</p>
+            <div className="mt-2 flex gap-2" role="group" aria-label={t.temperature.horizon}>
               {SCENARIO_DEFAULTS.horizonOptionsHours.map((h) => (
                 <button
                   key={h}
@@ -230,7 +228,7 @@ export function TemperatureScenarioChart() {
                 <XAxis
                   dataKey="hour"
                   tick={{ fontSize: 12, fill: "#475569" }}
-                  label={{ value: "Hours from now", position: "insideBottom", offset: -4, fontSize: 12, fill: "#64748b" }}
+                  label={{ value: t.temperature.hoursFromNow, position: "insideBottom", offset: -4, fontSize: 12, fill: "#64748b" }}
                 />
                 <YAxis
                   domain={[60, yTop]}
@@ -241,22 +239,22 @@ export function TemperatureScenarioChart() {
                 />
                 <Tooltip
                   formatter={(value: number, name: string) => [`${value.toFixed(1)}°F`, name]}
-                  labelFormatter={(h) => `Hour ${h}`}
+                  labelFormatter={(h) => `${t.temperature.hoursFromNow}: ${h}`}
                   contentStyle={{ fontSize: 12, borderRadius: 8 }}
                 />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
-                {TEMPERATURE_THRESHOLDS.map((t) => (
+                {TEMPERATURE_THRESHOLDS.map((th) => (
                   <ReferenceLine
-                    key={t.tempF}
-                    y={t.tempF}
-                    stroke={SEVERITY_COLORS[t.severity]}
+                    key={th.tempF}
+                    y={th.tempF}
+                    stroke={SEVERITY_COLORS[th.severity]}
                     strokeDasharray="4 4"
                     strokeOpacity={0.8}
                     label={{
-                      value: `${t.tempF}°F · ${t.label}`,
+                      value: `${th.tempF}°F · ${t.thresholds[th.tempF].label}`,
                       position: "insideTopLeft",
                       fontSize: 10,
-                      fill: SEVERITY_COLORS[t.severity],
+                      fill: SEVERITY_COLORS[th.severity],
                     }}
                   />
                 ))}
@@ -265,7 +263,7 @@ export function TemperatureScenarioChart() {
                     key={m.key}
                     type="monotone"
                     dataKey={m.key}
-                    name={m.name}
+                    name={scenarioName(m.key)}
                     stroke={m.color}
                     strokeWidth={2}
                     strokeDasharray={m.dash}
@@ -277,8 +275,7 @@ export function TemperatureScenarioChart() {
             </ResponsiveContainer>
           </div>
           <p className="mt-1 text-xs text-slate-500">
-            The dashed red curve is an <strong>illustrative runaway-like scenario, not a prediction</strong>.
-            It is capped at {SCENARIO_DEFAULTS.acceleratingCeilingF}°F and may run off the top of the chart.
+            {t.temperature.illustrativeNote(SCENARIO_DEFAULTS.acceleratingCeilingF)}
           </p>
         </div>
       </div>
@@ -286,38 +283,38 @@ export function TemperatureScenarioChart() {
       {/* Time-to-threshold (scenario math only) */}
       <div className="mt-6">
         <h3 className="text-sm font-semibold text-slate-900">
-          Time to reach each threshold{" "}
-          <span className="font-normal text-slate-500">— scenario math, not a predicted failure time</span>
+          {t.temperature.timeToThreshold}{" "}
+          <span className="font-normal text-slate-500">{t.temperature.timeToThresholdNote}</span>
         </h3>
         <div className="mt-2 overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-slate-200 text-left text-slate-500">
-                <th className="py-2 pr-4 font-medium">Threshold</th>
-                {crossings.map((c) => (
-                  <th key={c.key} className="py-2 pr-4 font-medium">{c.name}</th>
+                <th className="py-2 pr-4 font-medium">{t.temperature.thColThreshold}</th>
+                {SCENARIO_META.map((m) => (
+                  <th key={m.key} className="py-2 pr-4 font-medium">{scenarioName(m.key)}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {TEMPERATURE_THRESHOLDS.map((t, i) => (
-                <tr key={t.tempF} className="border-b border-slate-100">
+              {TEMPERATURE_THRESHOLDS.map((th, i) => (
+                <tr key={th.tempF} className="border-b border-slate-100">
                   <td className="py-2 pr-4">
-                    <span style={{ color: SEVERITY_COLORS[t.severity] }} className="font-semibold">
-                      {t.tempF}°F
+                    <span style={{ color: SEVERITY_COLORS[th.severity] }} className="font-semibold">
+                      {th.tempF}°F
                     </span>{" "}
-                    <span className="text-slate-600">{t.label}</span>
+                    <span className="text-slate-600">{t.thresholds[th.tempF].label}</span>
                   </td>
                   {crossings.map((c) => {
                     const hour = c.rows[i].hour;
                     return (
                       <td key={c.key} className="py-2 pr-4 tabular-nums text-slate-700">
                         {hour == null ? (
-                          <span className="text-slate-400">not within {horizon}h</span>
+                          <span className="text-slate-400">{t.ui.notWithin(horizon)}</span>
                         ) : hour === 0 ? (
-                          "already at/above"
+                          t.ui.alreadyAtAbove
                         ) : (
-                          `~${hour}h`
+                          t.ui.approxHours(hour)
                         )}
                       </td>
                     );
@@ -330,15 +327,11 @@ export function TemperatureScenarioChart() {
       </div>
 
       <WhatThisMeans>
-        These three curves are arithmetic, not forecasts. The{" "}
-        <strong>linear</strong> curve simply extends the observed rate. The{" "}
-        <strong>cooling-controlled</strong> curve assumes active cooling gradually
-        slows the rise. The <strong>illustrative runaway-like</strong> curve shows
-        what self-accelerating heat <em>could</em> look like if polymerization
-        outpaced cooling — it is a teaching shape, not a prediction. Real tank
-        behavior depends on the <a className="font-medium text-brand-700 underline" href="#unknowns">known unknowns</a>.
-        The "time to threshold" values are just where each line crosses a
-        reference temperature, never a predicted time of failure.
+        {t.temperature.wtmPre}
+        <a className="font-medium text-brand-700 underline" href="#unknowns">
+          {t.temperature.wtmLink}
+        </a>
+        {t.temperature.wtmPost}
       </WhatThisMeans>
     </Card>
   );

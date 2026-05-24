@@ -17,11 +17,13 @@ import {
 import { VAPOR_PRESSURE_TABLE } from "../data/constants";
 import { interpolateVaporPressurePsi, pressureForcePounds } from "../lib/model";
 import { round } from "../lib/units";
+import { useT } from "../i18n";
 import { AssumptionControl } from "./AssumptionControl";
 import { Card, WhatThisMeans } from "./ui";
 
 export function VaporPressureChart() {
-  const [psi, setPsi] = useState(1.103); // equilibrium VP at ~90°F as a starting point
+  const t = useT();
+  const [psi, setPsi] = useState(1.103);
   const [areaFt2, setAreaFt2] = useState(100);
 
   const forceLb = pressureForcePounds(psi, areaFt2);
@@ -45,7 +47,7 @@ export function VaporPressureChart() {
                 <XAxis
                   dataKey="tempF"
                   tick={{ fontSize: 12, fill: "#475569" }}
-                  label={{ value: "Temperature (°F)", position: "insideBottom", offset: -4, fontSize: 12, fill: "#64748b" }}
+                  label={{ value: t.pressure.tempAxis, position: "insideBottom", offset: -4, fontSize: 12, fill: "#64748b" }}
                 />
                 <YAxis
                   tick={{ fontSize: 12, fill: "#475569" }}
@@ -53,8 +55,8 @@ export function VaporPressureChart() {
                   label={{ value: "psi", angle: -90, position: "insideLeft", fontSize: 12, fill: "#64748b" }}
                 />
                 <Tooltip
-                  formatter={(value: number) => [`${value} psi`, "Equilibrium VP"]}
-                  labelFormatter={(t) => `${t}°F`}
+                  formatter={(value: number) => [`${value} psi`, t.pressure.vpTooltip]}
+                  labelFormatter={(tt) => `${tt}°F`}
                   contentStyle={{ fontSize: 12, borderRadius: 8 }}
                 />
                 <Line type="monotone" dataKey="psi" stroke="#2563eb" strokeWidth={2} dot={{ r: 3 }} isAnimationActive={false} />
@@ -62,49 +64,31 @@ export function VaporPressureChart() {
             </ResponsiveContainer>
           </div>
           <p className="mt-1 text-center text-xs text-slate-500">
-            NOAA CHRIS <strong>equilibrium vapor pressure</strong> of the liquid — <strong>not total tank pressure</strong>.
-            At ~90°F this is about {round(at90, 2)} psi.
+            {t.pressure.vpCaptionPre} {t.pressure.vpCaptionAt90(round(at90, 2))}
           </p>
         </div>
 
         {/* Force calculator */}
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-          <h3 className="text-sm font-semibold text-slate-900">
-            Pressure → force (educational only)
-          </h3>
+        <div className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h3 className="text-sm font-semibold text-slate-900">{t.pressure.forceTitle}</h3>
           <p className="mt-1 text-xs text-slate-600">
-            A small pressure acting over a large area still produces a large total
-            force: <code className="rounded bg-white px-1">force = psi × area(ft²) × 144</code>.
+            {t.pressure.forceIntro}{" "}
+            <code className="rounded bg-white px-1">force = psi × area(ft²) × 144</code>.
           </p>
           <div className="mt-4 space-y-4">
-            <AssumptionControl label="Pressure" value={psi} min={0} max={50} step={0.1} unit="psi" onChange={setPsi} />
-            <AssumptionControl label="Surface area" value={areaFt2} min={1} max={2000} step={1} unit="ft²" onChange={setAreaFt2} />
+            <AssumptionControl label={t.pressure.pressureLabel} value={psi} min={0} max={50} step={0.1} unit="psi" onChange={setPsi} />
+            <AssumptionControl label={t.pressure.areaLabel} value={areaFt2} min={1} max={2000} step={1} unit="ft²" onChange={setAreaFt2} />
           </div>
           <div className="mt-4 rounded-lg bg-white p-3 ring-1 ring-slate-200">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Resulting force</p>
-            <p className="text-2xl font-bold text-slate-900 tabular-nums">
-              {Math.round(forceLb).toLocaleString()} lbf
-            </p>
-            <p className="text-xs text-slate-500">
-              ≈ {round(forceLb / 2000, 1).toLocaleString()} US tons of force
-            </p>
+            <p className="text-xs uppercase tracking-wide text-slate-500">{t.pressure.resultingForce}</p>
+            <p className="text-2xl font-bold text-slate-900 tabular-nums">{Math.round(forceLb).toLocaleString()} lbf</p>
+            <p className="text-xs text-slate-500">{t.pressure.tonsApprox(round(forceLb / 2000, 1).toLocaleString())}</p>
           </div>
-          <p className="mt-3 text-xs text-slate-500">
-            This is a textbook illustration of how pressure scales with area. It is
-            <strong> not</strong> a statement about this tank's strength or failure point.
-          </p>
+          <p className="mt-3 text-xs text-slate-500">{t.pressure.forceDisclaimer}</p>
         </div>
       </div>
 
-      <WhatThisMeans>
-        Equilibrium vapor pressure rises with temperature, but the actual tank
-        pressure depends on venting, headspace, gas generation, polymer blocking
-        lines, leaks or cracks, and structural condition — so do not equate the two.
-        A low numerical psi can still create large forces across a big tank surface.
-        We deliberately do <strong>not</strong> estimate the tank's failure pressure:
-        that is unknown without tank design, welds, corrosion, vent settings, fill
-        level, and deformation data.
-      </WhatThisMeans>
+      <WhatThisMeans>{t.pressure.wtm}</WhatThisMeans>
     </Card>
   );
 }

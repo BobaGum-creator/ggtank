@@ -16,6 +16,7 @@ import {
 } from "../data/constants";
 import { estimateComposition } from "../lib/model";
 import { clamp, formatEnergy, formatPercent } from "../lib/units";
+import { useT } from "../i18n";
 import { AssumptionControl } from "./AssumptionControl";
 import { Badge, Card, WhatThisMeans } from "./ui";
 
@@ -28,6 +29,7 @@ interface Segment {
 }
 
 export function CompositionEstimator() {
+  const t = useT();
   const [volMin, setVolMin] = useState<number>(VOLUME_DEFAULTS_GALLONS.min);
   const [volMid, setVolMid] = useState<number>(VOLUME_DEFAULTS_GALLONS.likelyLow);
   const [volMax, setVolMax] = useState<number>(VOLUME_DEFAULTS_GALLONS.max);
@@ -48,7 +50,6 @@ export function CompositionEstimator() {
     [density, cp, initialTempF, currentTempF, coolingMult],
   );
 
-  // Volume-by-volume results (absolute energies differ; the FRACTION does not).
   const results = useMemo(
     () => ({
       min: estimateComposition({ gallons: volMin, ...base }),
@@ -66,34 +67,16 @@ export function CompositionEstimator() {
   const remaining = clamp(1 - adiabatic - unknownExtra - vapor, 0, 1);
 
   const segments: Segment[] = [
-    {
-      key: "remaining",
-      label: "Remaining liquid MMA",
-      fraction: remaining,
-      color: "#3b82f6",
-      note: "Unreacted monomer still in liquid form.",
-    },
-    {
-      key: "polymerized",
-      label: "Polymerized / gelled (energy-equivalent)",
-      fraction: adiabatic,
-      color: "#f59e0b",
-      note: "Energy-equivalent share implied by the measured temperature rise alone.",
-    },
-    {
-      key: "unknown",
-      label: "Unknown / unmeasured gradients",
-      fraction: unknownExtra,
-      color: "#94a3b8",
-      note: "Extra reaction that active cooling could have masked. Grows with the cooling multiplier.",
-    },
-    {
-      key: "vapor",
-      label: "Vapor / headspace",
-      fraction: vapor,
-      color: "#a78bfa",
-      note: "Large by volume, tiny by mass — shown conceptually.",
-    },
+    { key: "remaining", label: t.composition.segRemaining, fraction: remaining, color: "#3b82f6", note: t.composition.segRemainingNote },
+    { key: "polymerized", label: t.composition.segPolymerized, fraction: adiabatic, color: "#f59e0b", note: t.composition.segPolymerizedNote },
+    { key: "unknown", label: t.composition.segUnknown, fraction: unknownExtra, color: "#94a3b8", note: t.composition.segUnknownNote },
+    { key: "vapor", label: t.composition.segVapor, fraction: vapor, color: "#a78bfa", note: t.composition.segVaporNote },
+  ];
+
+  const volumeRows = [
+    { label: t.composition.rowMinimum, res: results.min },
+    { label: t.composition.rowLikely, res: results.mid },
+    { label: t.composition.rowMaximum, res: results.max },
   ];
 
   return (
@@ -101,12 +84,12 @@ export function CompositionEstimator() {
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         {/* Controls */}
         <div className="min-w-0 space-y-4">
-          <h3 className="text-sm font-semibold text-slate-900">Assumptions</h3>
-          <AssumptionControl label="Volume — minimum" value={volMin} min={1000} max={34000} step={500} unit="gal" onChange={setVolMin} />
-          <AssumptionControl label="Volume — likely" value={volMid} min={1000} max={34000} step={500} unit="gal" onChange={setVolMid} />
-          <AssumptionControl label="Volume — maximum" value={volMax} min={1000} max={34000} step={500} unit="gal" onChange={setVolMax} />
+          <h3 className="text-sm font-semibold text-slate-900">{t.composition.assumptions}</h3>
+          <AssumptionControl label={t.composition.volMin} value={volMin} min={1000} max={34000} step={500} unit="gal" onChange={setVolMin} />
+          <AssumptionControl label={t.composition.volLikely} value={volMid} min={1000} max={34000} step={500} unit="gal" onChange={setVolMid} />
+          <AssumptionControl label={t.composition.volMax} value={volMax} min={1000} max={34000} step={500} unit="gal" onChange={setVolMax} />
           <AssumptionControl
-            label="Density"
+            label={t.composition.density}
             value={density}
             min={MMA_DENSITY_MIN_KG_PER_L}
             max={MMA_DENSITY_MAX_KG_PER_L}
@@ -116,7 +99,7 @@ export function CompositionEstimator() {
             onChange={setDensity}
           />
           <AssumptionControl
-            label="Heat capacity"
+            label={t.composition.heatCapacity}
             value={cp}
             min={1.6}
             max={2.2}
@@ -125,16 +108,16 @@ export function CompositionEstimator() {
             help={MMA_CP_KJ_PER_KG_K.note}
             onChange={setCp}
           />
-          <AssumptionControl label="Initial temperature" value={initialTempF} min={50} max={140} step={1} unit="°F" onChange={setInitialTempF} />
-          <AssumptionControl label="Current temperature" value={currentTempF} min={50} max={200} step={1} unit="°F" onChange={setCurrentTempF} />
+          <AssumptionControl label={t.composition.initialTemp} value={initialTempF} min={50} max={140} step={1} unit="°F" onChange={setInitialTempF} />
+          <AssumptionControl label={t.composition.currentTemp} value={currentTempF} min={50} max={200} step={1} unit="°F" onChange={setCurrentTempF} />
           <AssumptionControl
-            label="Cooling removal multiplier"
+            label={t.composition.coolingMult}
             value={coolingMult}
             min={1}
             max={COMPOSITION_DEFAULTS.coolingRemovalMultiplierMax}
             step={0.5}
             unit="×"
-            help="1× = purely adiabatic (no heat removed). Higher values assume cooling carried away heat before it showed up as a temperature rise."
+            help={t.composition.coolingMultHelp}
             onChange={setCoolingMult}
           />
         </div>
@@ -143,15 +126,11 @@ export function CompositionEstimator() {
         <div className="min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
             <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">
-                Energy-equivalent conversion (from temp rise alone)
-              </p>
+              <p className="text-xs uppercase tracking-wide text-slate-500">{t.composition.convFromTemp}</p>
               <p className="text-3xl font-bold text-amber-600">{formatPercent(adiabatic)}</p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-wide text-slate-500">
-                With cooling multiplier ({coolingMult}×)
-              </p>
+              <p className="text-xs uppercase tracking-wide text-slate-500">{t.composition.withCoolingMult(coolingMult)}</p>
               <p className="text-3xl font-bold text-slate-700">
                 {formatPercent(clamp(coolingAdjusted, 0, 1))}
                 {r.exceedsOneHundredPercent && <span className="ml-1 text-base">⚠️</span>}
@@ -161,25 +140,16 @@ export function CompositionEstimator() {
 
           {r.exceedsOneHundredPercent && (
             <div role="alert" className="mt-3 rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-800">
-              <strong>These assumptions are inconsistent.</strong> The cooling-adjusted
-              estimate exceeds 100%, which is physically impossible. It usually means
-              the cooling multiplier is set higher than the data can support. Treat
-              this as "assumptions don't add up," not as a real result.
+              <strong>{t.composition.inconsistentTitle}</strong> {t.composition.inconsistentBody}
             </div>
           )}
 
           {/* Stacked composition bar */}
           <div className="mt-5">
-            <p className="text-sm font-medium text-slate-700">
-              Conceptual composition (energy-equivalent, not measured)
-            </p>
-            <div className="mt-2 flex h-10 w-full overflow-hidden rounded-lg ring-1 ring-slate-200" role="img" aria-label="Conceptual composition bands">
+            <p className="text-sm font-medium text-slate-700">{t.composition.conceptualTitle}</p>
+            <div className="mt-2 flex h-10 w-full overflow-hidden rounded-lg ring-1 ring-slate-200" role="img" aria-label={t.composition.conceptualTitle}>
               {segments.map((s) => (
-                <div
-                  key={s.key}
-                  style={{ width: `${s.fraction * 100}%`, backgroundColor: s.color }}
-                  title={`${s.label}: ${formatPercent(s.fraction)}`}
-                />
+                <div key={s.key} style={{ width: `${s.fraction * 100}%`, backgroundColor: s.color }} title={`${s.label}: ${formatPercent(s.fraction)}`} />
               ))}
             </div>
             <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -199,26 +169,20 @@ export function CompositionEstimator() {
           {/* Absolute-energy range by volume */}
           <div className="mt-5 overflow-x-auto">
             <p className="text-sm font-medium text-slate-700">
-              Absolute energy by volume{" "}
-              <span className="font-normal text-slate-500">
-                — the conversion % above is the same for every volume; only the raw Joules scale
-              </span>
+              {t.composition.absByVolume}{" "}
+              <span className="font-normal text-slate-500">{t.composition.absByVolumeNote}</span>
             </p>
             <table className="mt-2 w-full min-w-[440px] border-collapse text-sm">
               <thead>
                 <tr className="border-b border-slate-200 text-left text-slate-500">
-                  <th className="py-2 pr-4 font-medium">Volume</th>
-                  <th className="py-2 pr-4 font-medium">Mass</th>
-                  <th className="py-2 pr-4 font-medium">If fully polymerized</th>
-                  <th className="py-2 pr-4 font-medium">Heat from measured rise</th>
+                  <th className="py-2 pr-4 font-medium">{t.composition.colVolume}</th>
+                  <th className="py-2 pr-4 font-medium">{t.composition.colMass}</th>
+                  <th className="py-2 pr-4 font-medium">{t.composition.colIfFully}</th>
+                  <th className="py-2 pr-4 font-medium">{t.composition.colHeatFromRise}</th>
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { label: "Minimum", res: results.min },
-                  { label: "Likely", res: results.mid },
-                  { label: "Maximum", res: results.max },
-                ].map(({ label, res }) => (
+                {volumeRows.map(({ label, res }) => (
                   <tr key={label} className="border-b border-slate-100">
                     <td className="py-2 pr-4">{label} · {res.gallons.toLocaleString()} gal</td>
                     <td className="py-2 pr-4 tabular-nums">{Math.round(res.massKg).toLocaleString()} kg</td>
@@ -231,22 +195,13 @@ export function CompositionEstimator() {
           </div>
 
           <p className="mt-3 flex flex-wrap items-center gap-2 text-xs text-slate-500">
-            <Badge tone="info">Heat of polymerization: {MMA_HEAT_OF_POLYMERIZATION_KJ_PER_MOL.value} kJ/mol</Badge>
-            <Badge tone="neutral">Energy-equivalent estimate — not a measurement</Badge>
+            <Badge tone="info">{t.composition.badgeHeatOfPoly(MMA_HEAT_OF_POLYMERIZATION_KJ_PER_MOL.value)}</Badge>
+            <Badge tone="neutral">{t.composition.badgeEnergyEquiv}</Badge>
           </p>
         </div>
       </div>
 
-      <WhatThisMeans>
-        The observed 77°F → 90°F rise alone would correspond to only a low
-        single-digit percent of full MMA-to-PMMA polymerization energy if no heat
-        had been removed. Because firefighters are cooling the tank, and because
-        internal temperatures may be uneven, actual conversion could be higher or
-        lower. This is an <strong>energy-equivalent estimate, not a measurement of
-        actual composition</strong>. It can be badly wrong if cooling water removed
-        significant heat, if the internal temperature is not uniform, if there is
-        venting, if material has gelled, or if pressure relief has occurred.
-      </WhatThisMeans>
+      <WhatThisMeans>{t.composition.wtm}</WhatThisMeans>
     </Card>
   );
 }
