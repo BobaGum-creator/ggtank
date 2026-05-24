@@ -30,6 +30,13 @@ export const en = {
       "This site is not affiliated with OCFA, GKN Aerospace, the City of Garden Grove, EPA, or Cal OES. It does not determine whether any address is safe.",
     followOfficial: "Follow official evacuation and re-entry instructions.",
     officialHeading: "Follow official sources",
+    channelRoles: {
+      "Orange County Fire Authority (OCFA)": "Incident command, evacuation, and re-entry",
+      "City of Garden Grove": "Local emergency notifications",
+      "California Governor's Office of Emergency Services (Cal OES)": "State emergency coordination",
+      "U.S. Environmental Protection Agency (EPA)": "Air monitoring and environmental response",
+      "Orange County Health Care Agency": "Public-health guidance",
+    } as Record<string, string>,
     lastUpdate: "Last data update:",
     reportedNote: "Reported figures only — see Sources & Assumptions below.",
   },
@@ -154,6 +161,15 @@ export const en = {
     observationLabels: {
       "Earlier reported internal temperature": "Earlier reported internal temperature",
       "Reported internal gauge temperature": "Reported internal gauge temperature",
+    } as Record<string, string>,
+    observationSources: {
+      "Reuters/AP public reporting": "Reuters/AP public reporting",
+      "Reuters public reporting": "Reuters public reporting",
+    } as Record<string, string>,
+    confidence: {
+      reported: "reported",
+      estimated: "estimated",
+      official: "official",
     } as Record<string, string>,
     events: {
       "incident-start": {

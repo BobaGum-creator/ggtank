@@ -27,6 +27,13 @@ export const vi: Translation = {
       "Trang này không liên kết với OCFA, GKN Aerospace, Thành phố Garden Grove, EPA hay Cal OES. Trang không xác định bất kỳ địa chỉ nào là an toàn.",
     followOfficial: "Hãy tuân theo các chỉ dẫn chính thức về sơ tán và quay trở lại.",
     officialHeading: "Hãy theo dõi các nguồn chính thức",
+    channelRoles: {
+      "Orange County Fire Authority (OCFA)": "Chỉ huy sự cố, sơ tán và quay trở lại",
+      "City of Garden Grove": "Thông báo khẩn cấp tại địa phương",
+      "California Governor's Office of Emergency Services (Cal OES)": "Điều phối khẩn cấp cấp tiểu bang",
+      "U.S. Environmental Protection Agency (EPA)": "Giám sát không khí và ứng phó môi trường",
+      "Orange County Health Care Agency": "Hướng dẫn y tế công cộng",
+    },
     lastUpdate: "Cập nhật dữ liệu lần cuối:",
     reportedNote: "Chỉ là số liệu được báo cáo — xem Nguồn & Giả định bên dưới.",
   },
@@ -143,6 +150,15 @@ export const vi: Translation = {
     observationLabels: {
       "Earlier reported internal temperature": "Nhiệt độ trong được báo cáo trước đó",
       "Reported internal gauge temperature": "Nhiệt độ đồng hồ trong được báo cáo",
+    },
+    observationSources: {
+      "Reuters/AP public reporting": "Reuters/AP, báo chí công khai",
+      "Reuters public reporting": "Reuters, báo chí công khai",
+    },
+    confidence: {
+      reported: "được báo cáo",
+      estimated: "ước tính",
+      official: "chính thức",
     },
     events: {
       "incident-start": {
