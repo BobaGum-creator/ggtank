@@ -7,6 +7,7 @@ import { observations } from "../data/observations";
 import { timelineEvents } from "../data/timeline";
 import { sourceById } from "../data/sources";
 import { formatDateOnly, formatTimestamp } from "../lib/format";
+import { useT } from "../i18n";
 import { Badge, Card, WhatThisMeans } from "./ui";
 
 type RowKind = "incident" | "official" | "report" | "reading";
@@ -23,17 +24,10 @@ interface Row {
 }
 
 const KIND_DOT: Record<RowKind, string> = {
-  incident: "#ea580c", // orange-600
-  reading: "#f59e0b", // amber-500
-  report: "#0284c7", // sky-600
-  official: "#2563eb", // brand-600
-};
-
-const KIND_LABEL: Record<RowKind, string> = {
-  incident: "Incident",
-  reading: "Data point",
-  report: "News report",
-  official: "Official",
+  incident: "#ea580c",
+  reading: "#f59e0b",
+  report: "#0284c7",
+  official: "#2563eb",
 };
 
 const KIND_TONE: Record<RowKind, "caution" | "watch" | "neutral" | "info"> = {
@@ -43,40 +37,45 @@ const KIND_TONE: Record<RowKind, "caution" | "watch" | "neutral" | "info"> = {
   official: "info",
 };
 
-function buildRows(): Row[] {
+export function Timeline() {
+  const t = useT();
+
+  const kindLabel: Record<RowKind, string> = {
+    incident: t.timeline.kind.incident,
+    reading: t.timeline.kind.reading,
+    report: t.timeline.kind.report,
+    official: t.timeline.kind.official,
+  };
+
   const rows: Row[] = [];
 
   for (const o of observations) {
-    const src = o.source;
     rows.push({
       ms: new Date(o.timestamp).getTime(),
       when: formatTimestamp(o.timestamp),
       kind: "reading",
-      title: `Reported internal temperature: ${o.tempF}°F`,
-      detail: o.label,
-      sourceLabel: src,
+      title: t.timeline.readingTitle(o.tempF),
+      detail: t.timeline.observationLabels[o.label] ?? o.label,
+      sourceLabel: o.source,
       confidence: o.confidence,
     });
   }
 
   for (const e of timelineEvents) {
     const src = e.sourceId ? sourceById(e.sourceId) : undefined;
+    const tr = t.timeline.events[e.id];
     rows.push({
       ms: new Date(e.timestamp).getTime(),
       when: e.timeKnown ? formatTimestamp(e.timestamp) : formatDateOnly(e.timestamp),
       kind: e.kind,
-      title: e.title,
-      detail: e.detail,
+      title: tr?.title ?? e.title,
+      detail: tr?.detail ?? e.detail,
       sourceLabel: src ? `${src.publisher} — ${src.title}` : undefined,
       sourceUrl: src?.url,
     });
   }
 
-  return rows.sort((a, b) => a.ms - b.ms);
-}
-
-export function Timeline() {
-  const rows = buildRows();
+  rows.sort((a, b) => a.ms - b.ms);
 
   return (
     <Card>
@@ -90,7 +89,7 @@ export function Timeline() {
             />
             <div className="flex flex-wrap items-center gap-2">
               <time className="text-xs font-semibold text-slate-500">{r.when}</time>
-              <Badge tone={KIND_TONE[r.kind]}>{KIND_LABEL[r.kind]}</Badge>
+              <Badge tone={KIND_TONE[r.kind]}>{kindLabel[r.kind]}</Badge>
               {r.confidence && <Badge tone="neutral">{r.confidence}</Badge>}
             </div>
             <p className="mt-1 text-sm font-medium text-slate-900">{r.title}</p>
@@ -103,22 +102,21 @@ export function Timeline() {
                   rel="noopener noreferrer"
                   className="mt-1 inline-block text-xs font-medium text-brand-700 underline decoration-brand-200 underline-offset-2 hover:decoration-brand-600"
                 >
-                  Source: {r.sourceLabel} ↗
+                  {t.ui.sourcePrefix} {r.sourceLabel} ↗
                 </a>
               ) : (
-                <p className="mt-1 text-xs text-slate-500">Source: {r.sourceLabel}</p>
+                <p className="mt-1 text-xs text-slate-500">
+                  {t.ui.sourcePrefix} {r.sourceLabel}
+                </p>
               ))}
           </li>
         ))}
       </ol>
 
       <WhatThisMeans>
-        These are <strong>reported</strong> times, drawn from public reporting and
-        official announcements — not independently verified, and times of day are
-        approximate unless a specific reading time was given. Add new readings in{" "}
-        <code className="rounded bg-white px-1">src/data/observations.ts</code> and
-        they will appear here automatically. For the current situation, always rely
-        on official channels.
+        {t.timeline.wtmPre}
+        <code className="rounded bg-white px-1">src/data/observations.ts</code>
+        {t.timeline.wtmPost}
       </WhatThisMeans>
     </Card>
   );

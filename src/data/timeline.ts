@@ -17,6 +17,8 @@
 export type TimelineKind = "incident" | "official" | "report";
 
 export interface TimelineEvent {
+  /** Stable id used to look up translated title/detail in the i18n files. */
+  readonly id: string;
   /** ISO 8601 timestamp, Pacific. Use noon for date-only events. */
   readonly timestamp: string;
   /** False when only the calendar date is known (shows date without a time). */
@@ -30,6 +32,7 @@ export interface TimelineEvent {
 
 export const timelineEvents: readonly TimelineEvent[] = [
   {
+    id: "incident-start",
     timestamp: "2026-05-21T12:00:00-07:00",
     timeKnown: false,
     title: "Incident reported to begin",
@@ -39,6 +42,7 @@ export const timelineEvents: readonly TimelineEvent[] = [
     kind: "incident",
   },
   {
+    id: "reuters-report",
     timestamp: "2026-05-23T12:00:00-07:00",
     timeKnown: false,
     title: "Reuters reports temperature rise and cooling efforts",
@@ -48,6 +52,7 @@ export const timelineEvents: readonly TimelineEvent[] = [
     kind: "report",
   },
   {
+    id: "state-emergency",
     timestamp: "2026-05-23T12:00:00-07:00",
     timeKnown: false,
     title: "California Governor proclaims a State of Emergency",
@@ -56,6 +61,7 @@ export const timelineEvents: readonly TimelineEvent[] = [
     kind: "official",
   },
   {
+    id: "ap-report",
     timestamp: "2026-05-24T12:00:00-07:00",
     timeKnown: false,
     title: "Associated Press report on the crisis",

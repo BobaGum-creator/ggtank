@@ -9,33 +9,38 @@ import { KnownUnknowns } from "./components/KnownUnknowns";
 import { SourcesPanel } from "./components/SourcesPanel";
 import { Section } from "./components/ui";
 import { INCIDENT } from "./data/constants";
-
-const NAV = [
-  { id: "summary", label: "Summary" },
-  { id: "timeline", label: "Timeline" },
-  { id: "temperature", label: "Temperature" },
-  { id: "composition", label: "Composition" },
-  { id: "pressure", label: "Pressure" },
-  { id: "plume", label: "Plume" },
-  { id: "unknowns", label: "Unknowns" },
-  { id: "sources", label: "Sources" },
-];
+import { useT } from "./i18n";
 
 function App() {
+  const t = useT();
+
+  const NAV = [
+    { id: "summary", label: t.nav.summary },
+    { id: "timeline", label: t.nav.timeline },
+    { id: "temperature", label: t.nav.temperature },
+    { id: "composition", label: t.nav.composition },
+    { id: "pressure", label: t.nav.pressure },
+    { id: "plume", label: t.nav.plume },
+    { id: "unknowns", label: t.nav.unknowns },
+    { id: "sources", label: t.nav.sources },
+  ];
+
+  const [volLo, volHi] = INCIDENT.reportedContentsGallonsRange;
+
   return (
     <div className="min-h-screen bg-slate-50">
       <a
         href="#summary"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-brand-600 focus:px-3 focus:py-2 focus:text-white"
       >
-        Skip to content
+        {t.ui.skipToContent}
       </a>
 
       <EmergencyBanner />
 
       {/* In-page navigation */}
       <nav
-        aria-label="Section navigation"
+        aria-label={t.ui.sectionNav}
         className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur"
       >
         <div className="mx-auto max-w-6xl overflow-x-auto px-4 sm:px-6">
@@ -57,82 +62,80 @@ function App() {
       <main className="mx-auto max-w-6xl space-y-14 px-4 py-10 sm:px-6">
         <Section
           id="summary"
-          eyebrow="Situation summary"
-          title="Where things stand"
-          intro={
-            <>
-              A snapshot of <em>reported</em> conditions at the {INCIDENT.facility} in{" "}
-              {INCIDENT.city}, framed with the uncertainty it deserves. Reported
-              contents: roughly{" "}
-              {INCIDENT.reportedContentsGallonsRange[0].toLocaleString()}–
-              {INCIDENT.reportedContentsGallonsRange[1].toLocaleString()} gallons of{" "}
-              {INCIDENT.chemical} (CAS {INCIDENT.cas}) in a{" "}
-              {INCIDENT.tankCapacityGallons.toLocaleString()}-gallon tank.
-            </>
-          }
+          eyebrow={t.sections.summary.eyebrow}
+          title={t.sections.summary.title}
+          intro={t.sections.summary.intro({
+            facility: INCIDENT.facility,
+            city: INCIDENT.city,
+            lo: volLo.toLocaleString(),
+            hi: volHi.toLocaleString(),
+            chemical: INCIDENT.chemical,
+            cas: INCIDENT.cas,
+            cap: INCIDENT.tankCapacityGallons.toLocaleString(),
+          })}
         >
           <SummaryCards />
         </Section>
 
         <Section
           id="timeline"
-          eyebrow="Reported chronology"
-          title="Timeline of reported data points"
-          intro="When each reported temperature reading and incident event occurred, in order. These are reported times from public sources, not independently verified."
+          eyebrow={t.sections.timeline.eyebrow}
+          title={t.sections.timeline.title}
+          intro={t.sections.timeline.intro}
         >
           <Timeline />
         </Section>
 
         <Section
           id="temperature"
-          eyebrow="Scenario model"
-          title="Temperature scenarios"
-          intro="Adjust the assumptions and compare three transparent what-if curves against published reference thresholds. None of these is a prediction."
+          eyebrow={t.sections.temperature.eyebrow}
+          title={t.sections.temperature.title}
+          intro={t.sections.temperature.intro}
         >
           <TemperatureScenarioChart />
         </Section>
 
         <Section
           id="composition"
-          eyebrow="Energy estimator"
-          title="Internal composition / energy estimate"
-          intro="An energy-equivalent estimate of how much polymerization the measured temperature rise could represent — not a measurement of what is actually inside the tank."
+          eyebrow={t.sections.composition.eyebrow}
+          title={t.sections.composition.title}
+          intro={t.sections.composition.intro}
         >
           <CompositionEstimator />
         </Section>
 
         <Section
           id="pressure"
-          eyebrow="Context"
-          title="Pressure & vapor context"
-          intro="Equilibrium vapor pressure rises with temperature, but it is not the same as the total pressure inside the tank."
+          eyebrow={t.sections.pressure.eyebrow}
+          title={t.sections.pressure.title}
+          intro={t.sections.pressure.intro}
         >
           <VaporPressureChart />
         </Section>
 
         <Section
           id="plume"
-          eyebrow="Education"
-          title="How vapor plumes behave"
-          intro="A conceptual explainer — deliberately not a live hazard map — of why plume paths are uncertain."
+          eyebrow={t.sections.plume.eyebrow}
+          title={t.sections.plume.title}
+          intro={t.sections.plume.intro}
         >
           <PlumeExplainer />
         </Section>
 
         <Section
           id="unknowns"
-          eyebrow="Honesty"
-          title="Known unknowns"
-          intro="The variables that would be required for any genuine assessment, and that are not publicly known."
+          eyebrow={t.sections.unknowns.eyebrow}
+          title={t.sections.unknowns.title}
+          intro={t.sections.unknowns.intro}
         >
           <KnownUnknowns />
         </Section>
 
         <Section
           id="sources"
-          eyebrow="Transparency"
-          title="Sources & assumptions"
-          intro="Every fact, constant, and threshold traces back to a public source listed here."
+          eyebrow={t.sections.sources.eyebrow}
+          title={t.sections.sources.title}
+          intro={t.sections.sources.intro}
         >
           <SourcesPanel />
         </Section>
@@ -141,14 +144,10 @@ function App() {
         <section aria-labelledby="share-heading" className="section-anchor">
           <div className="rounded-2xl border border-brand-200 bg-brand-50 p-6">
             <h2 id="share-heading" className="text-xl font-bold text-brand-900">
-              Share this responsibly
+              {t.share.title}
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-slate-700">
-              This dashboard is for understanding mechanisms and uncertainty. Do not
-              use it to override official evacuation, shelter, or re-entry orders. If
-              you share it, share it together with the official sources at the top of
-              the page — and make clear it is an independent educational estimate, not
-              guidance from any agency.
+              {t.share.body}
             </p>
           </div>
         </section>
@@ -157,15 +156,10 @@ function App() {
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-8 text-xs leading-relaxed text-slate-500 sm:px-6">
           <p>
-            <strong className="text-slate-700">GG Tank Science Dashboard.</strong> An
-            independent, open-source educational project. Not affiliated with OCFA,
-            GKN Aerospace, the City of Garden Grove, EPA, or Cal OES. It does not
-            determine whether any address is safe.
+            <strong className="text-slate-700">{t.footer.line1Brand}</strong>
+            {t.footer.line1}
           </p>
-          <p className="mt-2">
-            All figures are reported or assumed values carrying real uncertainty.
-            Always follow official emergency instructions.
-          </p>
+          <p className="mt-2">{t.footer.line2}</p>
         </div>
       </footer>
     </div>

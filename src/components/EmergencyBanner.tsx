@@ -1,25 +1,31 @@
 /**
  * EmergencyBanner.tsx — the page header: title, mission subtitle, the
- * not-official disclaimer, the official-channels strip, and the
- * "Last data update" timestamp pulled from observations.
+ * not-official disclaimer, the official-channels strip, the language switcher,
+ * and the "Last data update" timestamp pulled from observations.
  */
 import { officialChannels } from "../data/sources";
 import { lastDataUpdate } from "../data/observations";
 import { formatTimestamp } from "../lib/format";
+import { useT } from "../i18n";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function EmergencyBanner() {
+  const t = useT();
   const updated = formatTimestamp(lastDataUpdate());
 
   return (
     <header className="border-b border-slate-200 bg-white">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            GG Tank Science Dashboard
-          </h1>
-          <p className="text-base font-medium text-brand-700">
-            A transparent estimate, not official guidance.
-          </p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              GG Tank Science Dashboard
+            </h1>
+            <p className="text-base font-medium text-brand-700">{t.banner.subtitle}</p>
+          </div>
+          <div className="flex-none">
+            <LanguageSwitcher />
+          </div>
         </div>
 
         {/* Primary disclaimer */}
@@ -27,18 +33,15 @@ export function EmergencyBanner() {
           role="note"
           className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900"
         >
-          <strong className="font-semibold">Important:</strong> This site is not
-          affiliated with OCFA, GKN Aerospace, the City of Garden Grove, EPA, or
-          Cal OES. It does not determine whether any address is safe.{" "}
-          <strong className="font-semibold">
-            Follow official evacuation and re-entry instructions.
-          </strong>
+          <strong className="font-semibold">{t.banner.importantLabel}</strong>{" "}
+          {t.banner.disclaimer}{" "}
+          <strong className="font-semibold">{t.banner.followOfficial}</strong>
         </div>
 
         {/* Official channels strip */}
-        <nav aria-label="Official information channels" className="mt-4">
+        <nav aria-label={t.banner.officialHeading} className="mt-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Follow official sources
+            {t.banner.officialHeading}
           </p>
           <ul className="mt-2 flex flex-wrap gap-2">
             {officialChannels.map((c) => (
@@ -61,11 +64,11 @@ export function EmergencyBanner() {
         </nav>
 
         <p className="mt-4 text-xs text-slate-500">
-          Last data update:{" "}
+          {t.banner.lastUpdate}{" "}
           <time dateTime={lastDataUpdate()} className="font-medium text-slate-700">
             {updated}
           </time>{" "}
-          · Reported figures only — see Sources &amp; Assumptions below.
+          · {t.banner.reportedNote}
         </p>
       </div>
     </header>
