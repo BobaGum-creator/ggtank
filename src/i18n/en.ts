@@ -42,6 +42,8 @@ export const en = {
     pressure: "Pressure",
     plume: "Plume",
     unknowns: "Unknowns",
+    faq: "FAQ",
+    glossary: "Glossary",
     sources: "Sources",
   },
 
@@ -95,6 +97,17 @@ export const en = {
       title: "Known unknowns",
       intro:
         "The variables that would be required for any genuine assessment, and that are not publicly known.",
+    },
+    faq: {
+      eyebrow: "Questions",
+      title: "Frequently asked questions",
+      intro:
+        "Plain answers to common questions. None of these tell you whether a location is safe — only officials can.",
+    },
+    glossary: {
+      eyebrow: "Plain language",
+      title: "Glossary",
+      intro: "Short definitions of the key terms used on this page.",
     },
     sources: {
       eyebrow: "Transparency",
@@ -359,6 +372,59 @@ export const en = {
       tempCurves: "Temperature curves are arithmetic scenarios, not forecasts",
       conversion: "Conversion fraction is energy-equivalent, not a measured composition",
     },
+  },
+
+  faq: {
+    items: [
+      {
+        q: "Is this an official site? Can it tell me whether my home is safe?",
+        a: "No. This is an independent educational project, not affiliated with any agency, and it cannot determine whether any address is safe. Only official responders can. Follow OCFA, the City of Garden Grove, Cal OES, EPA, and the Orange County Health Care Agency.",
+      },
+      {
+        q: "What is methyl methacrylate (MMA)?",
+        a: "A colorless, flammable liquid used to make PMMA (acrylic) plastic. It is mostly liquid at normal temperatures with vapor above it, and it can polymerize — chemically link into a solid — while releasing heat.",
+      },
+      {
+        q: "Why is temperature such a concern? Isn't it just heat?",
+        a: "The concern is not only ordinary heat. If MMA starts to polymerize, the reaction itself releases heat. If that heat outpaces cooling or blocks venting, pressure and the risk of rupture can rise. That is why responders are cooling the tank.",
+      },
+      {
+        q: "The air smells sharp or like a nail salon. Is that dangerous?",
+        a: "Odor is not a safety measurement — you may smell MMA at levels well below or above what matters, so your nose is not a reliable gauge of risk. Rely on official, real-time air monitoring and any health guidance instead.",
+      },
+      {
+        q: "Will the tank explode?",
+        a: "That is unknown. A violent rupture is a recognized hazard if polymerization runs away, but no one can publicly predict whether or when it will happen — the necessary information isn't available (see Known Unknowns). Follow evacuation orders regardless.",
+      },
+      {
+        q: "How current is the data on this site?",
+        a: "It shows reported figures with timestamps (see the Timeline), not a live feed, and they are not independently verified. For the current situation, always use official channels.",
+      },
+      {
+        q: "Why doesn't the site give exact answers?",
+        a: "Because the most important variables — actual pressure, valve condition, inhibitor level, internal hot spots, and more — are not publicly known. Exact numbers would be false precision. The tools here are for understanding mechanisms and ranges, not predictions.",
+      },
+      {
+        q: "How do I get official alerts?",
+        a: "Use the official sources linked at the top of this page, and sign up for your county's emergency alerts. Those authorities make the evacuation, shelter, and re-entry decisions.",
+      },
+    ],
+  },
+
+  glossary: {
+    items: [
+      { term: "Methyl methacrylate (MMA)", def: "The chemical in the tank (CAS 80-62-6): a colorless, flammable liquid monomer used to make acrylic plastic." },
+      { term: "Monomer", def: "A small molecule that can join with many copies of itself to form a polymer. MMA is the monomer; PMMA is the polymer." },
+      { term: "Polymerization", def: "The reaction that links monomer molecules into long chains (a polymer). For MMA it releases heat (it is exothermic)." },
+      { term: "PMMA / acrylic", def: "Poly(methyl methacrylate) — the solid plastic (acrylic, e.g. Plexiglas) that MMA forms when it polymerizes." },
+      { term: "Exothermic", def: "A reaction that releases heat. Runaway exothermic polymerization is the central concern with this tank." },
+      { term: "Inhibitor (stabilizer)", def: "An additive that suppresses unwanted polymerization during storage. If it is depleted or overwhelmed, reaction risk rises." },
+      { term: "Vapor pressure", def: "The pressure of vapor in equilibrium with the liquid at a given temperature. It rises with temperature — but it is NOT the same as the total pressure inside the tank." },
+      { term: "Headspace", def: "The vapor-filled space above the liquid inside the tank." },
+      { term: "Adiabatic", def: "An idealized case where no heat is removed. The estimator's 'no heat removed' assumption is adiabatic; real cooling changes the true picture." },
+      { term: "Plume", def: "A cloud of vapor carried by the wind. Its path is shaped by wind, terrain, and buildings, so it is neither a straight line nor a perfect circle." },
+      { term: "Restabilization", def: "Adding inhibitor back into a bulk tank to regain stability. Guidance flags this at about 45°C / 113°F." },
+    ],
   },
 
   share: {
