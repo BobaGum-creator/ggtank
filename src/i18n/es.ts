@@ -202,6 +202,11 @@ export const es: Translation = {
         detail:
           "Cobertura de las acciones de respuesta y el contexto de evacuación; según se informó, el monitoreo del aire no había detectado contaminación fuera del sitio en ese momento, pero se pidió a los residentes seguir las órdenes de evacuación.",
       },
+      "crack-confirmed": {
+        title: "OCFA confirma una grieta en el tanque",
+        detail:
+          "OCFA confirmó una grieta en el tanque. Se programó una misión de reconocimiento durante toda la noche del domingo para comprobar si se había liberado presión.",
+      },
     },
     wtmPre:
       "Estas son horas reportadas, tomadas de la prensa pública y anuncios oficiales —no verificadas de forma independiente, y las horas del día son aproximadas salvo que se diera una hora de lectura específica. Agregue nuevas lecturas en ",

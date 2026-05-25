@@ -70,4 +70,13 @@ export const timelineEvents: readonly TimelineEvent[] = [
     sourceId: "ap",
     kind: "report",
   },
+  {
+    id: "crack-confirmed",
+    timestamp: "2026-05-24T20:30:00-07:00",
+    timeKnown: true,
+    title: "OCFA confirms a crack in the tank",
+    detail:
+      "OCFA confirmed a crack in the tank. An overnight recon mission was scheduled through Sunday night to check whether pressure had been released.",
+    kind: "official",
+  },
 ];

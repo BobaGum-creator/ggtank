@@ -212,6 +212,11 @@ export const en = {
         detail:
           "Coverage of response actions and evacuation context; air monitoring reportedly had not detected offsite pollution at the time, but residents were told to follow evacuation orders.",
       },
+      "crack-confirmed": {
+        title: "OCFA confirms a crack in the tank",
+        detail:
+          "OCFA confirmed a crack in the tank. An overnight recon mission was scheduled through Sunday night to check whether pressure had been released.",
+      },
     } as Record<string, { title: string; detail: string }>,
     wtmPre:
       "These are reported times, drawn from public reporting and official announcements — not independently verified, and times of day are approximate unless a specific reading time was given. Add new readings in ",
