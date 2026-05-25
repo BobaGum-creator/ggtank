@@ -9,23 +9,17 @@ import {
   TEMPERATURE_THRESHOLDS,
 } from "../data/constants";
 import { observations, latestObservation } from "../data/observations";
-import { ratePerHour } from "../lib/model";
 import { useT } from "../i18n";
-
-function hoursBetween(aIso: string, bIso: string): number {
-  return (new Date(bIso).getTime() - new Date(aIso).getTime()) / 3_600_000;
-}
 
 export function SummaryCards() {
   const t = useT();
   const latest = latestObservation();
-  const prev = observations.length >= 2 ? observations[observations.length - 2] : undefined;
 
   const currentTempF = latest?.tempF;
-  const trend =
-    latest && prev
-      ? ratePerHour(prev.tempF, latest.tempF, hoursBetween(prev.timestamp, latest.timestamp))
-      : undefined;
+  // The reported rate of rise (OCFA: ~+1°F/hr). We show the reported figure
+  // rather than averaging the last two readings, because the latest reading is
+  // capped at the 100°F gauge maximum, which would understate the true rate.
+  const reportedRate = INCIDENT.reportedRateFPerHour;
 
   const reachedThreshold = currentTempF
     ? [...TEMPERATURE_THRESHOLDS].reverse().find((th) => currentTempF >= th.tempF)
@@ -49,9 +43,9 @@ export function SummaryCards() {
         />
         <Stat
           label={t.summary.reportedTrend}
-          value={trend != null ? `${trend > 0 ? "+" : ""}${trend.toFixed(1)}°F/hr` : "—"}
-          sub={trend != null ? t.summary.fromTwoReadings : t.summary.needTwo}
-          tone={trend != null && trend > 0 ? "watch" : "neutral"}
+          value={`${reportedRate > 0 ? "+" : ""}${reportedRate.toFixed(1)}°F/hr`}
+          sub={t.summary.reportedRateSub}
+          tone={reportedRate > 0 ? "watch" : "neutral"}
         />
         <Stat
           label={t.summary.estVolume}

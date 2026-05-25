@@ -255,9 +255,13 @@ export function simulateTemperatureScenarios(
   for (let i = 0; i <= totalSteps; i++) {
     t = i * step;
     if (i > 0) {
-      const rate =
+      // Self-accelerating heat competing with Newtonian cooling loss. Floored at
+      // the base rate so the illustrative runaway never rises slower than the
+      // linear curve (i.e. it never dips below the other scenarios).
+      const rawRate =
         rateFPerHour * Math.exp(accelerationFactor * t) -
         lossCoeff * (accelT - ambientTempF);
+      const rate = Math.max(rateFPerHour, rawRate);
       accelT = clamp(accelT + rate * step, ambientTempF, ceiling);
     }
     // Record only on whole-hour boundaries to keep the dataset chart-friendly.
