@@ -20,8 +20,8 @@ function App() {
   const siteShareUrl = () => `${siteBaseUrl()}?lang=${lang}`;
 
   const NAV = [
-    { id: "summary", label: t.nav.summary },
     { id: "temperature", label: t.nav.temperature },
+    { id: "summary", label: t.nav.summary },
     { id: "timeline", label: t.nav.timeline },
     { id: "composition", label: t.nav.composition },
     { id: "pressure", label: t.nav.pressure },
@@ -37,15 +37,13 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50">
       <a
-        href="#summary"
+        href="#temperature"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-brand-600 focus:px-3 focus:py-2 focus:text-white"
       >
         {t.ui.skipToContent}
       </a>
 
-      <EmergencyBanner />
-
-      {/* In-page navigation */}
+      {/* In-page navigation — pinned to the top and always visible */}
       <nav
         aria-label={t.ui.sectionNav}
         className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur"
@@ -66,7 +64,18 @@ function App() {
         </div>
       </nav>
 
+      <EmergencyBanner />
+
       <main className="mx-auto max-w-6xl space-y-14 px-4 py-10 sm:px-6">
+        <Section
+          id="temperature"
+          eyebrow={t.sections.temperature.eyebrow}
+          title={t.sections.temperature.title}
+          intro={t.sections.temperature.intro}
+        >
+          <TemperatureScenarioChart />
+        </Section>
+
         <Section
           id="summary"
           eyebrow={t.sections.summary.eyebrow}
@@ -82,15 +91,6 @@ function App() {
           })}
         >
           <SummaryCards />
-        </Section>
-
-        <Section
-          id="temperature"
-          eyebrow={t.sections.temperature.eyebrow}
-          title={t.sections.temperature.title}
-          intro={t.sections.temperature.intro}
-        >
-          <TemperatureScenarioChart />
         </Section>
 
         <Section
