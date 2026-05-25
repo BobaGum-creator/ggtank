@@ -23,6 +23,10 @@ export const en = {
     approxHours: (h: number) => `~${h}h`,
   },
 
+  breaking: {
+    label: "Breaking update",
+  },
+
   banner: {
     subtitle: "A transparent estimate, not official guidance.",
     importantLabel: "Important:",

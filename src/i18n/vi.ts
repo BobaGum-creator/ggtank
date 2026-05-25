@@ -20,6 +20,10 @@ export const vi: Translation = {
     approxHours: (h: number) => `~${h} giờ`,
   },
 
+  breaking: {
+    label: "Cập nhật khẩn cấp",
+  },
+
   banner: {
     subtitle: "Một ước tính minh bạch, không phải hướng dẫn chính thức.",
     importantLabel: "Quan trọng:",
