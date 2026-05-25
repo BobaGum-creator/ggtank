@@ -18,7 +18,7 @@ import { estimateComposition, liveEstimate } from "../lib/model";
 import { clamp, formatEnergy, formatPercent } from "../lib/units";
 import { useT } from "../i18n";
 import { AssumptionControl } from "./AssumptionControl";
-import { Badge, Card, WhatThisMeans } from "./ui";
+import { Badge, Card, Collapsible, WhatThisMeans } from "./ui";
 
 interface Segment {
   key: string;
@@ -83,8 +83,9 @@ export function CompositionEstimator() {
     <Card>
       <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
         {/* Controls */}
-        <div className="min-w-0 space-y-4">
-          <h3 className="text-sm font-semibold text-slate-900">{t.composition.assumptions}</h3>
+        <div className="min-w-0">
+          <Collapsible title={t.composition.assumptions}>
+          <div className="space-y-4">
           <AssumptionControl label={t.composition.volMin} value={volMin} min={1000} max={34000} step={500} unit="gal" onChange={setVolMin} />
           <AssumptionControl label={t.composition.volLikely} value={volMid} min={1000} max={34000} step={500} unit="gal" onChange={setVolMid} />
           <AssumptionControl label={t.composition.volMax} value={volMax} min={1000} max={34000} step={500} unit="gal" onChange={setVolMax} />
@@ -120,6 +121,8 @@ export function CompositionEstimator() {
             help={t.composition.coolingMultHelp}
             onChange={setCoolingMult}
           />
+          </div>
+          </Collapsible>
         </div>
 
         {/* Output */}

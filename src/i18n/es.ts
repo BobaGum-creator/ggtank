@@ -14,6 +14,8 @@ export const es: Translation = {
     sectionNav: "Navegación de secciones",
     skipToContent: "Saltar al contenido",
     reset: "Restablecer",
+    show: "Mostrar",
+    hide: "Ocultar",
     resetToObserved: (rate: string) => `Volver al valor observado (${rate}°F/h)`,
     sourcePrefix: "Fuente:",
     notWithin: (h: number) => `no dentro de ${h} h`,

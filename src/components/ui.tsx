@@ -2,7 +2,7 @@
  * ui.tsx — small, shared presentational primitives.
  * Keeps the section components focused on content rather than markup plumbing.
  */
-import type { ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import { useT } from "../i18n";
 
 export function Card({
@@ -147,5 +147,56 @@ export function Stat({
       <p className={`mt-1 text-2xl font-bold ${accent[tone]}`}>{value}</p>
       {sub && <p className="mt-1 text-xs text-slate-500">{sub}</p>}
     </Card>
+  );
+}
+
+/**
+ * A collapsible panel. Collapsed by default; the header is a clear toggle
+ * (chevron + Show/Hide pill). An optional `action` (e.g. a Reset button) shows
+ * to the right of the header only when expanded.
+ */
+export function Collapsible({
+  title,
+  action,
+  defaultOpen = false,
+  children,
+}: {
+  title: string;
+  action?: ReactNode;
+  defaultOpen?: boolean;
+  children: ReactNode;
+}) {
+  const t = useT();
+  const [open, setOpen] = useState(defaultOpen);
+  const id = useId();
+  return (
+    <div className="rounded-lg border border-slate-200">
+      <div className="flex items-center justify-between gap-2 px-3 py-2">
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={() => setOpen((o) => !o)}
+          className="flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-brand-700"
+        >
+          <span
+            aria-hidden="true"
+            className={`text-xs text-slate-400 transition-transform ${open ? "rotate-90" : ""}`}
+          >
+            ▶
+          </span>
+          {title}
+          <span className="ml-1 inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+            {open ? t.ui.hide : t.ui.show}
+          </span>
+        </button>
+        {open && action}
+      </div>
+      {open && (
+        <div id={id} className="border-t border-slate-100 px-3 py-3">
+          {children}
+        </div>
+      )}
+    </div>
   );
 }
