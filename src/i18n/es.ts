@@ -206,6 +206,7 @@ export const es: Translation = {
         title: "OCFA confirma una grieta en el tanque",
         detail:
           "OCFA confirmó una grieta en el tanque. Se programó una misión de reconocimiento durante toda la noche del domingo para comprobar si se había liberado presión.",
+        bannerTitle: "OCFA confirma grieta en el tanque",
       },
     },
     wtmPre:

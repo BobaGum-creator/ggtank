@@ -216,8 +216,9 @@ export const en = {
         title: "OCFA confirms a crack in the tank",
         detail:
           "OCFA confirmed a crack in the tank. An overnight recon mission was scheduled through Sunday night to check whether pressure had been released.",
+        bannerTitle: "OCFA confirms tank crack",
       },
-    } as Record<string, { title: string; detail: string }>,
+    } as Record<string, { title: string; detail: string; bannerTitle?: string }>,
     wtmPre:
       "These are reported times, drawn from public reporting and official announcements — not independently verified, and times of day are approximate unless a specific reading time was given. Add new readings in ",
     wtmPost:

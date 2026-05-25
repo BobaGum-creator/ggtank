@@ -205,6 +205,7 @@ export const vi: Translation = {
         title: "OCFA xác nhận có vết nứt trên bồn",
         detail:
           "OCFA đã xác nhận một vết nứt trên bồn. Một nhiệm vụ trinh sát suốt đêm Chủ nhật được lên lịch để kiểm tra xem áp suất đã được giải phóng hay chưa.",
+        bannerTitle: "OCFA xác nhận vết nứt trên bồn",
       },
     },
     wtmPre:

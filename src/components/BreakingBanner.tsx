@@ -1,19 +1,41 @@
 /**
  * BreakingBanner.tsx — a prominent red bar at the very top showing the latest
- * reported reading. Data-driven from the most recent observation, so it updates
- * automatically when a new reading is added to observations.ts.
+ * update: whichever is most recent between the newest reported reading and the
+ * newest timeline event. Data-driven, so it updates automatically as new
+ * readings/events are added.
  */
 import { latestObservation } from "../data/observations";
-import { formatTimestamp } from "../lib/format";
+import { timelineEvents } from "../data/timeline";
+import { formatDateOnly, formatTimestamp } from "../lib/format";
 import { LOCALES, useLanguage } from "../i18n";
 
 export function BreakingBanner() {
   const { t, lang } = useLanguage();
-  const latest = latestObservation();
-  if (!latest) return null;
+  const locale = LOCALES[lang];
 
-  const reading = t.timeline.readingTitle(latest.tempF) + (latest.gaugeMax ? "+" : "");
-  const time = formatTimestamp(latest.timestamp, LOCALES[lang]);
+  const obs = latestObservation();
+  const event = [...timelineEvents].sort(
+    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+  )[0];
+
+  const obsMs = obs ? new Date(obs.timestamp).getTime() : -Infinity;
+  const eventMs = event ? new Date(event.timestamp).getTime() : -Infinity;
+
+  let title: string | undefined;
+  let when: string | undefined;
+
+  if (event && eventMs >= obsMs) {
+    const tr = t.timeline.events[event.id];
+    title = tr?.bannerTitle ?? tr?.title ?? event.title;
+    when = event.timeKnown
+      ? formatTimestamp(event.timestamp, locale)
+      : formatDateOnly(event.timestamp, locale);
+  } else if (obs) {
+    title = t.timeline.readingTitle(obs.tempF) + (obs.gaugeMax ? "+" : "");
+    when = formatTimestamp(obs.timestamp, locale);
+  }
+
+  if (!title) return null;
 
   return (
     <div className="bg-red-600 text-white">
@@ -25,8 +47,8 @@ export function BreakingBanner() {
           <span className="inline-flex items-center gap-1 rounded bg-white/20 px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide">
             <span aria-hidden="true">●</span> {t.breaking.label}
           </span>
-          <span className="font-semibold">{reading}</span>
-          <span className="text-white/85">· {time}</span>
+          <span className="font-semibold">{title}</span>
+          {when && <span className="text-white/85">· {when}</span>}
           <span className="text-white/85 underline decoration-white/40 underline-offset-2">
             {t.nav.timeline} →
           </span>
