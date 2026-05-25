@@ -151,12 +151,12 @@ export const es: Translation = {
     observationLabels: {
       "Earlier reported internal temperature": "Temperatura interna reportada anterior",
       "Reported internal gauge temperature": "Temperatura reportada del manómetro interno",
-      "Reported above the 100°F gauge maximum (no longer readable)": "Reportada por encima del máximo del manómetro de 100°F (ya no se puede leer)",
+      "Internal temperature reported over 100°F": "Temperatura interna reportada por encima de 100°F",
     },
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP, reportes públicos",
       "Reuters public reporting": "Reuters, reportes públicos",
-      "ABC7 reporting (relayed, unconfirmed by OCFA)": "Reportaje de ABC7 (difundido, no confirmado por OCFA)",
+      "ABC7 (KABC), citing OCFA": "ABC7 (KABC), citando a OCFA",
     },
     confidence: {
       reported: "reportado",
@@ -212,7 +212,7 @@ export const es: Translation = {
       "Impulsa SOLO la curva ilustrativa tipo descontrol. Mayor = autocalentamiento más rápido.",
     horizon: "Horizonte de simulación",
     hoursFromNow: "Horas a partir de ahora",
-    nowReported: "ahora (sin confirmar)",
+    nowReported: "ahora (reportado)",
     illustrativeNote: (ceiling: number) =>
       `La curva roja discontinua es un escenario ilustrativo tipo descontrol, no una predicción. Está limitada a ${ceiling}°F y puede salirse de la parte superior del gráfico.`,
     legend: {

@@ -58,11 +58,11 @@ export const observations: readonly Observation[] = [
     confidence: "reported",
   },
   {
-    timestamp: "2026-05-25T18:20:00-07:00",
-    label: "Reported above the 100°F gauge maximum (no longer readable)",
+    timestamp: "2026-05-24T18:10:00-07:00",
+    label: "Internal temperature reported over 100°F",
     tempF: 100,
-    source: "ABC7 reporting (relayed, unconfirmed by OCFA)",
-    confidence: "unconfirmed",
+    source: "ABC7 (KABC), citing OCFA",
+    confidence: "reported",
   },
 ];
 
