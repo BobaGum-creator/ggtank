@@ -16,6 +16,8 @@ export const en = {
     sectionNav: "Section navigation",
     skipToContent: "Skip to content",
     reset: "Reset",
+    show: "Show",
+    hide: "Hide",
     resetToObserved: (rate: string) => `Reset to observed (${rate}°F/hr)`,
     sourcePrefix: "Source:",
     notWithin: (h: number) => `not within ${h}h`,

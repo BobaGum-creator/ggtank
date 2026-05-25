@@ -13,6 +13,8 @@ export const vi: Translation = {
     sectionNav: "Điều hướng mục",
     skipToContent: "Bỏ qua đến nội dung",
     reset: "Đặt lại",
+    show: "Hiện",
+    hide: "Ẩn",
     resetToObserved: (rate: string) => `Trở về giá trị quan sát (${rate}°F/giờ)`,
     sourcePrefix: "Nguồn:",
     notWithin: (h: number) => `không trong ${h} giờ`,

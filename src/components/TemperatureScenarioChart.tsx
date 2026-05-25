@@ -35,7 +35,7 @@ import { useLanguage } from "../i18n";
 import { buildScenarioUrl, parseScenarioParams } from "../lib/shareUrl";
 import { AssumptionControl } from "./AssumptionControl";
 import { ShareButtons } from "./ShareButtons";
-import { Card, WhatThisMeans } from "./ui";
+import { Card, Collapsible, WhatThisMeans } from "./ui";
 
 const SCENARIO_META: { key: ScenarioKey; color: string; dash?: string }[] = [
   { key: "linear", color: "#0f766e" },
@@ -138,18 +138,20 @@ export function TemperatureScenarioChart() {
       <div className="flex flex-col gap-6">
         {/* Controls */}
         <div className="min-w-0">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-900">{t.temperature.assumptions}</h3>
-            <button
-              type="button"
-              onClick={resetDefaults}
-              disabled={!isDirty}
-              className="inline-flex items-center gap-1 rounded-md border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-600 hover:border-brand-600 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              <span aria-hidden="true">↺</span> {t.ui.reset}
-            </button>
-          </div>
-          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Collapsible
+            title={t.temperature.assumptions}
+            action={
+              <button
+                type="button"
+                onClick={resetDefaults}
+                disabled={!isDirty}
+                className="inline-flex items-center gap-1 rounded-md border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-600 hover:border-brand-600 hover:text-brand-700 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                <span aria-hidden="true">↺</span> {t.ui.reset}
+              </button>
+            }
+          >
+          <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
           <AssumptionControl
             label={t.temperature.startTemp}
             value={startTempF}
@@ -241,6 +243,7 @@ export function TemperatureScenarioChart() {
             </div>
           </div>
           </div>
+          </Collapsible>
         </div>
 
         {/* Chart */}
