@@ -22,7 +22,6 @@ export interface ScenarioShareState {
   start: number;
   prev: number;
   hrs: number;
-  amb: number;
   cool: number;
   acc: number;
   hz: number;
@@ -34,7 +33,6 @@ const NUMERIC_KEYS: (keyof Omit<ScenarioShareState, "rate">)[] = [
   "start",
   "prev",
   "hrs",
-  "amb",
   "cool",
   "acc",
   "hz",

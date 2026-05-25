@@ -205,9 +205,6 @@ export const vi: Translation = {
     observedRate: "Tốc độ tăng quan sát được",
     observedRateHelp:
       "Tự động tính từ hai số đo, nhưng bạn có thể thay đổi.",
-    ambient: "Nhiệt độ môi trường",
-    ambientHelp:
-      "Nhiệt độ không khí bên ngoài; dùng cho số hạng mất nhiệt do làm mát mang tính minh họa.",
     cooling: "Hiệu quả làm mát",
     coolingHelp:
       "Mức độ làm mát chủ động kìm hãm tốc độ tăng theo thời gian. 0% = không kìm hãm.",

@@ -216,9 +216,6 @@ export const en = {
     observedRate: "Observed rate of rise",
     observedRateHelp:
       "Auto-calculated from the two readings, but you can override it.",
-    ambient: "Ambient temperature",
-    ambientHelp:
-      "Outside air temperature; used by the illustrative cooling-loss term.",
     cooling: "Cooling effectiveness",
     coolingHelp:
       "How strongly active cooling damps the rising rate over time. 0% = no damping.",

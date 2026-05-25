@@ -103,7 +103,6 @@ test("simulateTemperatureScenarios: linear is exact; cooling <= linear", () => {
   const { points } = simulateTemperatureScenarios({
     startTempF: 90,
     rateFPerHour: 1,
-    ambientTempF: 70,
     coolingEffectiveness: 0.4,
     accelerationFactor: 0.05,
     horizonHours: 24,
@@ -118,9 +117,8 @@ test("simulateTemperatureScenarios: linear is exact; cooling <= linear", () => {
 
 test("accelerating curve never dips below linear (or cooling)", () => {
   const { points } = simulateTemperatureScenarios({
-    startTempF: 123, // far above ambient, where the cooling-loss term is large
+    startTempF: 123,
     rateFPerHour: 1,
-    ambientTempF: 70,
     coolingEffectiveness: 0.4,
     accelerationFactor: 0.05,
     horizonHours: 24,
@@ -138,7 +136,6 @@ test("zero cooling effectiveness makes cooling == linear", () => {
   const { points } = simulateTemperatureScenarios({
     startTempF: 90,
     rateFPerHour: 1,
-    ambientTempF: 70,
     coolingEffectiveness: 0,
     accelerationFactor: 0,
     horizonHours: 12,
@@ -150,7 +147,6 @@ test("thresholdCrossings reports first hour reached or null", () => {
   const { points } = simulateTemperatureScenarios({
     startTempF: 90,
     rateFPerHour: 1,
-    ambientTempF: 70,
     coolingEffectiveness: 0,
     accelerationFactor: 0,
     horizonHours: 48,

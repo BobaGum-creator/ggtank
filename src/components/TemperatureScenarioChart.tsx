@@ -47,7 +47,6 @@ export function TemperatureScenarioChart() {
   const [startTempF, setStartTempF] = useState<number>(initial.start ?? SCENARIO_DEFAULTS.startTempF);
   const [previousTempF, setPreviousTempF] = useState<number>(initial.prev ?? SCENARIO_DEFAULTS.previousTempF);
   const [hoursBetween, setHoursBetween] = useState<number>(initial.hrs ?? SCENARIO_DEFAULTS.hoursBetweenReadings);
-  const [ambientTempF, setAmbientTempF] = useState<number>(initial.amb ?? SCENARIO_DEFAULTS.ambientTempF);
   const [coolingPct, setCoolingPct] = useState<number>(initial.cool ?? SCENARIO_DEFAULTS.coolingEffectiveness);
   const [accelerationFactor, setAccelerationFactor] = useState<number>(initial.acc ?? SCENARIO_DEFAULTS.accelerationFactor);
   const [horizon, setHorizon] = useState<number>(initial.hz ?? SCENARIO_DEFAULTS.defaultHorizonHours);
@@ -62,7 +61,6 @@ export function TemperatureScenarioChart() {
         start: startTempF,
         prev: previousTempF,
         hrs: hoursBetween,
-        amb: ambientTempF,
         cool: coolingPct,
         acc: accelerationFactor,
         hz: horizon,
@@ -79,7 +77,6 @@ export function TemperatureScenarioChart() {
     setStartTempF(SCENARIO_DEFAULTS.startTempF);
     setPreviousTempF(SCENARIO_DEFAULTS.previousTempF);
     setHoursBetween(SCENARIO_DEFAULTS.hoursBetweenReadings);
-    setAmbientTempF(SCENARIO_DEFAULTS.ambientTempF);
     setCoolingPct(SCENARIO_DEFAULTS.coolingEffectiveness);
     setAccelerationFactor(SCENARIO_DEFAULTS.accelerationFactor);
     setHorizon(SCENARIO_DEFAULTS.defaultHorizonHours);
@@ -90,7 +87,6 @@ export function TemperatureScenarioChart() {
     startTempF !== SCENARIO_DEFAULTS.startTempF ||
     previousTempF !== SCENARIO_DEFAULTS.previousTempF ||
     hoursBetween !== SCENARIO_DEFAULTS.hoursBetweenReadings ||
-    ambientTempF !== SCENARIO_DEFAULTS.ambientTempF ||
     coolingPct !== SCENARIO_DEFAULTS.coolingEffectiveness ||
     accelerationFactor !== SCENARIO_DEFAULTS.accelerationFactor ||
     horizon !== SCENARIO_DEFAULTS.defaultHorizonHours ||
@@ -101,12 +97,11 @@ export function TemperatureScenarioChart() {
       simulateTemperatureScenarios({
         startTempF,
         rateFPerHour: rate,
-        ambientTempF,
         coolingEffectiveness: coolingPct / 100,
         accelerationFactor,
         horizonHours: horizon,
       }),
-    [startTempF, rate, ambientTempF, coolingPct, accelerationFactor, horizon],
+    [startTempF, rate, coolingPct, accelerationFactor, horizon],
   );
 
   const yTop = useMemo(() => {
@@ -192,16 +187,6 @@ export function TemperatureScenarioChart() {
               </button>
             )}
           </div>
-          <AssumptionControl
-            label={t.temperature.ambient}
-            value={ambientTempF}
-            min={40}
-            max={110}
-            step={1}
-            unit="°F"
-            help={t.temperature.ambientHelp}
-            onChange={setAmbientTempF}
-          />
           <AssumptionControl
             label={t.temperature.cooling}
             value={coolingPct}
