@@ -47,18 +47,18 @@ export interface Observation {
 
 export const observations: readonly Observation[] = [
   {
-    timestamp: "2026-05-23T00:00:00-07:00",
+    timestamp: "2026-05-22T12:00:00-07:00",
     label: "Earlier reported internal temperature",
     tempF: 77,
     source: "Reuters/AP public reporting",
     confidence: "reported",
   },
   {
-    timestamp: "2026-05-23T13:00:00-07:00",
+    timestamp: "2026-05-23T09:54:10-07:00",
     label: "Reported internal gauge temperature",
     tempF: 90,
-    source: "Reuters public reporting",
-    confidence: "reported",
+    source: "OCFA Critical Incident Update (Chief Covey), via NBC LA",
+    confidence: "official",
   },
   {
     timestamp: "2026-05-24T18:10:00-07:00",

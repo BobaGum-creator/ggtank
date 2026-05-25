@@ -154,7 +154,7 @@ export const vi: Translation = {
     },
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP, báo chí công khai",
-      "Reuters public reporting": "Reuters, báo chí công khai",
+      "OCFA Critical Incident Update (Chief Covey), via NBC LA": "Bản cập nhật sự cố nghiêm trọng của OCFA (Chỉ huy Covey), qua NBC LA",
       "ABC7 (KABC), citing OCFA": "ABC7 (KABC), dẫn nguồn OCFA",
     },
     confidence: {
