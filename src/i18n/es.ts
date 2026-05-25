@@ -206,9 +206,6 @@ export const es: Translation = {
     observedRate: "Tasa de aumento observada",
     observedRateHelp:
       "Se calcula automáticamente a partir de las dos lecturas, pero puede modificarla.",
-    ambient: "Temperatura ambiente",
-    ambientHelp:
-      "Temperatura del aire exterior; usada por el término ilustrativo de pérdida por enfriamiento.",
     cooling: "Eficacia del enfriamiento",
     coolingHelp:
       "Cuánto amortigua el enfriamiento activo la tasa de aumento con el tiempo. 0% = sin amortiguación.",

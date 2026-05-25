@@ -186,7 +186,6 @@ export interface ScenarioParams {
   startTempF: number;
   /** Observed rate of rise, °F/hour. */
   rateFPerHour: number;
-  ambientTempF: number;
   /** Cooling effectiveness, normalized 0..1 (slider 0–100 ÷ 100). */
   coolingEffectiveness: number;
   /** Acceleration factor, per hour (0–0.2). */
@@ -213,10 +212,10 @@ export interface ScenarioResult {
  *
  *  1. Linear:      T(t) = T0 + r·t
  *  2. Cooling:     effectiveRate(t) = r·exp(−c·t/12); T(t) is its time integral.
- *  3. Accelerating (illustrative): Euler-integrated
- *        dT/dt = r·exp(a·t) − k·(T − ambient)
- *     where k scales with cooling effectiveness. Capped at a ceiling because the
- *     lumped model is meaningless past MMA's boiling point.
+ *  3. Accelerating (illustrative): rate(t) = r·exp(a·t), Euler-integrated and
+ *     capped at a ceiling. Because exp(a·t) ≥ 1, this curve always rises at least
+ *     as fast as the linear curve and accelerates upward over time. Capped
+ *     because the lumped model is meaningless past MMA's boiling point.
  */
 export function simulateTemperatureScenarios(
   params: ScenarioParams,
@@ -224,7 +223,6 @@ export function simulateTemperatureScenarios(
   const {
     startTempF,
     rateFPerHour,
-    ambientTempF,
     coolingEffectiveness,
     accelerationFactor,
     horizonHours,
@@ -232,8 +230,6 @@ export function simulateTemperatureScenarios(
 
   const step = SCENARIO_DEFAULTS.stepHours;
   const ceiling = SCENARIO_DEFAULTS.acceleratingCeilingF;
-  const lossCoeff =
-    coolingEffectiveness * SCENARIO_DEFAULTS.coolingLossCoeffPerEffectiveness;
   // Decay constant for the cooling-controlled rate: exp(−c·t/12).
   const coolingDecay = coolingEffectiveness / 12;
 
@@ -255,14 +251,11 @@ export function simulateTemperatureScenarios(
   for (let i = 0; i <= totalSteps; i++) {
     t = i * step;
     if (i > 0) {
-      // Self-accelerating heat competing with Newtonian cooling loss. Floored at
-      // the base rate so the illustrative runaway never rises slower than the
-      // linear curve (i.e. it never dips below the other scenarios).
-      const rawRate =
-        rateFPerHour * Math.exp(accelerationFactor * t) -
-        lossCoeff * (accelT - ambientTempF);
-      const rate = Math.max(rateFPerHour, rawRate);
-      accelT = clamp(accelT + rate * step, ambientTempF, ceiling);
+      // Self-accelerating heat: the rate grows exponentially with time, so the
+      // curve continually steepens (a true runaway shape) and stays at or above
+      // the linear curve.
+      const rate = rateFPerHour * Math.exp(accelerationFactor * t);
+      accelT = Math.min(accelT + rate * step, ceiling);
     }
     // Record only on whole-hour boundaries to keep the dataset chart-friendly.
     const isWholeHour = Math.abs(t - Math.round(t)) < 1e-9;

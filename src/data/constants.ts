@@ -208,7 +208,6 @@ export const SCENARIO_DEFAULTS = {
   // 90°F (reported, May 23) -> ~123°F (estimated, ~7 PM May 24) is ~33 hours at
   // ~1°F/hr, so the auto-rate resolves to 1°F/hr.
   hoursBetweenReadings: 33,
-  ambientTempF: 70,
   /** 0–100 slider. Higher = cooling damps the rising rate faster. */
   coolingEffectiveness: 40,
   /** 0–0.2 per hour. Drives the illustrative accelerating scenario only. */
@@ -217,9 +216,6 @@ export const SCENARIO_DEFAULTS = {
   defaultHorizonHours: 24,
   /** Euler integration step for the scenario simulation. Hours. */
   stepHours: 0.25,
-  /** Per-unit-of-cooling-effectiveness Newtonian loss coefficient (1/hr) used
-   *  ONLY in the illustrative accelerating scenario. Purely illustrative. */
-  coolingLossCoeffPerEffectiveness: 0.05,
   /** The accelerating scenario is capped here because past MMA's boiling point
    *  (~212–214°F) the simple lumped model stops being physically meaningful. °F. */
   acceleratingCeilingF: 300,
