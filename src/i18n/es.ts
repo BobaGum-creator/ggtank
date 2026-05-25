@@ -54,6 +54,7 @@ export const es: Translation = {
     faq: "Preguntas",
     glossary: "Glosario",
     sources: "Fuentes",
+    evacuation: "Evacuación",
   },
 
   sections: {
@@ -115,6 +116,12 @@ export const es: Translation = {
       title: "Fuentes y supuestos",
       intro:
         "Cada dato, constante y umbral se remite a una fuente pública aquí enumerada.",
+    },
+    evacuation: {
+      eyebrow: "Evacuación",
+      title: "Mapa de la zona de evacuación",
+      intro:
+        "Una instantánea reportada del área de evacuación. Los límites y las órdenes cambian — confirme siempre la zona de evacuación y las instrucciones actuales con OCFA y las autoridades locales.",
     },
   },
 
@@ -438,6 +445,24 @@ export const es: Translation = {
       { term: "Pluma", def: "Una nube de vapor arrastrada por el viento. Su trayectoria depende del viento, el terreno y los edificios, así que no es una línea recta ni un círculo perfecto." },
       { term: "Reestabilización", def: "Volver a añadir inhibidor a un tanque a granel para recuperar estabilidad. La guía la señala a unos 45°C / 113°F." },
     ],
+  },
+
+  evacuation: {
+    ordersActive: "Órdenes de evacuación activas",
+    address: "GKN Aerospace / fuga de MMA — 12122 Western Ave, Garden Grove",
+    imageAlt:
+      "Mapa reportado de la zona de evacuación del incidente de MMA en GKN Aerospace en Garden Grove, que delimita el área aproximadamente entre Ball Road, Valley View Street, Dale Street y Trask Avenue.",
+    caption:
+      "Instantánea reportada — no es orientación oficial y podría estar desactualizada. Confirme la zona de evacuación y las órdenes actuales con fuentes oficiales.",
+    zoneHeading: "Límites de la zona reportados",
+    boundaries: [
+      "Al sur de Ball Road",
+      "Al este de Valley View St",
+      "Al oeste de Dale Street",
+      "Al norte de Trask Avenue",
+    ],
+    wtm:
+      "Esto es una instantánea que alguien capturó, no un mapa en vivo ni oficial — la zona y las órdenes reales pueden cambiar en cualquier momento. Para el área de evacuación actual y qué hacer, confíe en",
   },
 
   share: {
