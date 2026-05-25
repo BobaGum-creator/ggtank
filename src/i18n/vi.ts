@@ -215,7 +215,9 @@ export const vi: Translation = {
       "CHỈ điều khiển đường cong minh họa kiểu mất kiểm soát. Cao hơn = tự sinh nhiệt nhanh hơn.",
     horizon: "Khoảng mô phỏng",
     hoursFromNow: "Số giờ kể từ bây giờ",
-    nowReported: "hiện tại (báo cáo)",
+    nowEstimated: "hiện tại (ước tính)",
+    extrapolatedNote:
+      "Điểm bắt đầu (~123°F) là ước tính ngoại suy từ số đo được báo cáo gần nhất 90°F ở mức ~1°F/giờ. Đồng hồ chỉ đo tối đa 100°F, nên nhiệt độ hiện tại không được đo trực tiếp.",
     illustrativeNote: (ceiling: number) =>
       `Đường đỏ nét đứt là kịch bản minh họa kiểu mất kiểm soát, không phải dự đoán. Nó được giới hạn ở ${ceiling}°F và có thể vượt ra khỏi đỉnh biểu đồ.`,
     legend: {

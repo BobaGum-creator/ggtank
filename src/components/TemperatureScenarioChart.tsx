@@ -28,7 +28,6 @@ import {
   thresholdCrossings,
   type ScenarioKey,
 } from "../lib/model";
-import { latestObservation } from "../data/observations";
 import { useLanguage } from "../i18n";
 import { buildScenarioUrl, parseScenarioParams } from "../lib/shareUrl";
 import { AssumptionControl } from "./AssumptionControl";
@@ -43,7 +42,6 @@ const SCENARIO_META: { key: ScenarioKey; color: string; dash?: string }[] = [
 
 export function TemperatureScenarioChart() {
   const { t, lang } = useLanguage();
-  const latest = latestObservation();
   // Restore a shared scenario from the URL on first load (falls back to defaults).
   const [initial] = useState(() => parseScenarioParams(window.location.search));
   const [startTempF, setStartTempF] = useState<number>(initial.start ?? SCENARIO_DEFAULTS.startTempF);
@@ -299,31 +297,30 @@ export function TemperatureScenarioChart() {
                     isAnimationActive={false}
                   />
                 ))}
-                {latest && (
-                  <ReferenceDot
-                    x={0}
-                    y={latest.tempF}
-                    r={6}
-                    fill="#dc2626"
-                    stroke="#ffffff"
-                    strokeWidth={2}
-                    isFront
-                    label={{
-                      value: `${latest.tempF}°F+ ${t.temperature.nowReported}`,
-                      position: "right",
-                      dy: 16,
-                      fontSize: 10,
-                      fontWeight: 600,
-                      fill: "#dc2626",
-                    }}
-                  />
-                )}
+                <ReferenceDot
+                  x={0}
+                  y={startTempF}
+                  r={6}
+                  fill="#dc2626"
+                  stroke="#ffffff"
+                  strokeWidth={2}
+                  isFront
+                  label={{
+                    value: `${Math.round(startTempF)}°F ${t.temperature.nowEstimated}`,
+                    position: "right",
+                    dy: 16,
+                    fontSize: 10,
+                    fontWeight: 600,
+                    fill: "#dc2626",
+                  }}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
           <p className="mt-1 text-xs text-slate-500">
             {t.temperature.illustrativeNote(SCENARIO_DEFAULTS.acceleratingCeilingF)}
           </p>
+          <p className="mt-1 text-xs text-slate-500">{t.temperature.extrapolatedNote}</p>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <span className="text-xs font-medium text-slate-600">{t.share.shareScenario}:</span>
             <ShareButtons size="sm" text={t.share.message} getUrl={scenarioShareUrl} />
