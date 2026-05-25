@@ -226,7 +226,6 @@ export const vi: Translation = {
   },
 
   thresholds: {
-    85: { label: "Mục tiêu làm mát được báo cáo", detail: "Một mục tiêu làm mát quan trọng được nhắc đến trong báo chí công khai." },
     86: { label: "Mục tiêu lưu trữ ưu tiên", detail: "Dưới ~30°C / 86°F là mục tiêu lưu trữ ưu tiên khi khả thi." },
     95: { label: "Độ ổn định lưu trữ BASF", detail: "SDS của BASF ghi độ ổn định lưu trữ dưới 35°C / 95°F." },
     104: { label: "Trần bảo vệ chất ức chế", detail: "Hướng dẫn xử lý ester methacrylate: giữ dưới 40°C / 104°F để giúp ngăn mất chất ổn định." },

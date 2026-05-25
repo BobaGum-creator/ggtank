@@ -227,7 +227,6 @@ export const es: Translation = {
   },
 
   thresholds: {
-    85: { label: "Objetivo de enfriamiento reportado", detail: "Un objetivo de enfriamiento clave mencionado en la prensa pública." },
     86: { label: "Objetivo de almacenamiento preferido", detail: "Por debajo de ~30°C / 86°F es un objetivo de almacenamiento preferido cuando es posible." },
     95: { label: "Estabilidad de almacenamiento BASF", detail: "La SDS de BASF indica estabilidad de almacenamiento por debajo de 35°C / 95°F." },
     104: { label: "Límite de protección del inhibidor", detail: "Guía de manejo de ésteres de metacrilato: mantener por debajo de 40°C / 104°F para ayudar a evitar la pérdida del estabilizador." },
