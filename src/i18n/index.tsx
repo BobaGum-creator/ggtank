@@ -16,15 +16,17 @@ import {
 import { en, type Translation } from "./en";
 import { es } from "./es";
 import { vi } from "./vi";
+import { ko } from "./ko";
 
-export type Lang = "en" | "es" | "vi";
+export type Lang = "en" | "es" | "vi" | "ko";
 
-export const DICTIONARIES: Record<Lang, Translation> = { en, es, vi };
+export const DICTIONARIES: Record<Lang, Translation> = { en, es, vi, ko };
 
 export const LANGUAGES: { code: Lang; label: string }[] = [
   { code: "en", label: en.langName },
   { code: "es", label: es.langName },
   { code: "vi", label: vi.langName },
+  { code: "ko", label: ko.langName },
 ];
 
 /** BCP-47 locales for Intl date formatting per language. */
@@ -32,12 +34,13 @@ export const LOCALES: Record<Lang, string> = {
   en: "en-US",
   es: "es",
   vi: "vi",
+  ko: "ko",
 };
 
 const STORAGE_KEY = "ggtank-lang";
 
 function isLang(value: string | null): value is Lang {
-  return value === "en" || value === "es" || value === "vi";
+  return value === "en" || value === "es" || value === "vi" || value === "ko";
 }
 
 /** URL ?lang → saved choice → browser language → English. */
@@ -50,6 +53,7 @@ function detectInitialLang(): Lang {
   const nav = window.navigator.language?.toLowerCase() ?? "";
   if (nav.startsWith("es")) return "es";
   if (nav.startsWith("vi")) return "vi";
+  if (nav.startsWith("ko")) return "ko";
   return "en";
 }
 

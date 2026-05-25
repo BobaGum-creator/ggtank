@@ -49,7 +49,8 @@ EPA, and the Orange County Health Care Agency.**
   the composition bar and plume graphic
 - Fully client-side — no backend, no external API calls. All facts live in local
   source files under `src/data/`.
-- **Multilingual**: English, Spanish (Español), and Vietnamese (Tiếng Việt), with
+- **Multilingual**: English, Spanish (Español), Vietnamese (Tiếng Việt), and
+  Korean (한국어), with
   a language switcher in the header. The choice is saved in `localStorage` and the
   default follows the browser language.
 - **Shareable links**: copy/native-share buttons, plus a deep link that encodes
@@ -107,12 +108,12 @@ Other adjustable data files:
 
 ## Languages / translations
 
-The UI ships in English, Spanish, and Vietnamese. Translations live in
+The UI ships in English, Spanish, Vietnamese, and Korean. Translations live in
 `src/i18n/`:
 
 - `en.ts` is the source of truth and defines the translation **shape**.
-- `es.ts` and `vi.ts` must satisfy that shape — TypeScript flags any missing or
-  misnamed key at build time, so a translation can't silently go missing.
+- `es.ts`, `vi.ts`, and `ko.ts` must satisfy that shape — TypeScript flags any
+  missing or misnamed key at build time, so a translation can't silently go missing.
 
 To **edit wording**, change the relevant string in the language file. To **add a
 new language**, copy `es.ts`, translate the values, then register it in
