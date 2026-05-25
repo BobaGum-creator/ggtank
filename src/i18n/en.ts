@@ -161,15 +161,18 @@ export const en = {
     observationLabels: {
       "Earlier reported internal temperature": "Earlier reported internal temperature",
       "Reported internal gauge temperature": "Reported internal gauge temperature",
+      "Reported above the 100°F gauge maximum (no longer readable)": "Reported above the 100°F gauge maximum (no longer readable)",
     } as Record<string, string>,
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP public reporting",
       "Reuters public reporting": "Reuters public reporting",
+      "ABC7 reporting (relayed, unconfirmed by OCFA)": "ABC7 reporting (relayed, unconfirmed by OCFA)",
     } as Record<string, string>,
     confidence: {
       reported: "reported",
       estimated: "estimated",
       official: "official",
+      unconfirmed: "unconfirmed",
     } as Record<string, string>,
     events: {
       "incident-start": {
@@ -219,6 +222,7 @@ export const en = {
       "Drives ONLY the illustrative runaway-like curve. Higher = faster self-heating.",
     horizon: "Simulation horizon",
     hoursFromNow: "Hours from now",
+    nowReported: "now (unconfirmed)",
     illustrativeNote: (ceiling: number) =>
       `The dashed red curve is an illustrative runaway-like scenario, not a prediction. It is capped at ${ceiling}°F and may run off the top of the chart.`,
     legend: {

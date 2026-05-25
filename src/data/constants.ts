@@ -201,9 +201,9 @@ export const VAPOR_PRESSURE_TABLE: readonly VaporPressurePoint[] = [
 // -----------------------------------------------------------------------------
 
 export const SCENARIO_DEFAULTS = {
-  startTempF: 90,
-  previousTempF: 77,
-  hoursBetweenReadings: 13,
+  startTempF: 100,
+  previousTempF: 90,
+  hoursBetweenReadings: 53,
   ambientTempF: 70,
   /** 0–100 slider. Higher = cooling damps the rising rate faster. */
   coolingEffectiveness: 40,

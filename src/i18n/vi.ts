@@ -150,15 +150,18 @@ export const vi: Translation = {
     observationLabels: {
       "Earlier reported internal temperature": "Nhiệt độ trong được báo cáo trước đó",
       "Reported internal gauge temperature": "Nhiệt độ đồng hồ trong được báo cáo",
+      "Reported above the 100°F gauge maximum (no longer readable)": "Được báo cáo vượt mức tối đa 100°F của đồng hồ (không còn đọc được)",
     },
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP, báo chí công khai",
       "Reuters public reporting": "Reuters, báo chí công khai",
+      "ABC7 reporting (relayed, unconfirmed by OCFA)": "Tin ABC7 (được lan truyền, chưa được OCFA xác nhận)",
     },
     confidence: {
       reported: "được báo cáo",
       estimated: "ước tính",
       official: "chính thức",
+      unconfirmed: "chưa xác nhận",
     },
     events: {
       "incident-start": {
@@ -208,6 +211,7 @@ export const vi: Translation = {
       "CHỈ điều khiển đường cong minh họa kiểu mất kiểm soát. Cao hơn = tự sinh nhiệt nhanh hơn.",
     horizon: "Khoảng mô phỏng",
     hoursFromNow: "Số giờ kể từ bây giờ",
+    nowReported: "hiện tại (chưa xác nhận)",
     illustrativeNote: (ceiling: number) =>
       `Đường đỏ nét đứt là kịch bản minh họa kiểu mất kiểm soát, không phải dự đoán. Nó được giới hạn ở ${ceiling}°F và có thể vượt ra khỏi đỉnh biểu đồ.`,
     legend: {

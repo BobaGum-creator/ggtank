@@ -10,6 +10,7 @@ import {
   Legend,
   Line,
   LineChart,
+  ReferenceDot,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -27,6 +28,7 @@ import {
   thresholdCrossings,
   type ScenarioKey,
 } from "../lib/model";
+import { latestObservation } from "../data/observations";
 import { useLanguage } from "../i18n";
 import { buildScenarioUrl, parseScenarioParams } from "../lib/shareUrl";
 import { AssumptionControl } from "./AssumptionControl";
@@ -41,6 +43,7 @@ const SCENARIO_META: { key: ScenarioKey; color: string; dash?: string }[] = [
 
 export function TemperatureScenarioChart() {
   const { t, lang } = useLanguage();
+  const latest = latestObservation();
   // Restore a shared scenario from the URL on first load (falls back to defaults).
   const [initial] = useState(() => parseScenarioParams(window.location.search));
   const [startTempF, setStartTempF] = useState<number>(initial.start ?? SCENARIO_DEFAULTS.startTempF);
@@ -296,6 +299,25 @@ export function TemperatureScenarioChart() {
                     isAnimationActive={false}
                   />
                 ))}
+                {latest && (
+                  <ReferenceDot
+                    x={0}
+                    y={latest.tempF}
+                    r={6}
+                    fill="#dc2626"
+                    stroke="#ffffff"
+                    strokeWidth={2}
+                    isFront
+                    label={{
+                      value: `${latest.tempF}°F+ ${t.temperature.nowReported}`,
+                      position: "right",
+                      dy: 16,
+                      fontSize: 10,
+                      fontWeight: 600,
+                      fill: "#dc2626",
+                    }}
+                  />
+                )}
               </LineChart>
             </ResponsiveContainer>
           </div>
