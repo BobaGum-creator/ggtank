@@ -1,5 +1,6 @@
 import { BreakingBanner } from "./components/BreakingBanner";
 import { EmergencyBanner } from "./components/EmergencyBanner";
+import { SectionNav } from "./components/SectionNav";
 import { SummaryCards } from "./components/SummaryCards";
 import { Timeline } from "./components/Timeline";
 import { TemperatureScenarioChart } from "./components/TemperatureScenarioChart";
@@ -21,20 +22,6 @@ function App() {
   const { t, lang } = useLanguage();
   const siteShareUrl = () => `${siteBaseUrl()}?lang=${lang}`;
 
-  const NAV = [
-    { id: "temperature", label: t.nav.temperature },
-    { id: "summary", label: t.nav.summary },
-    { id: "timeline", label: t.nav.timeline },
-    { id: "composition", label: t.nav.composition },
-    { id: "pressure", label: t.nav.pressure },
-    { id: "plume", label: t.nav.plume },
-    { id: "unknowns", label: t.nav.unknowns },
-    { id: "faq", label: t.nav.faq },
-    { id: "glossary", label: t.nav.glossary },
-    { id: "sources", label: t.nav.sources },
-    { id: "evacuation", label: t.nav.evacuation },
-  ];
-
   const [volLo, volHi] = INCIDENT.reportedContentsGallonsRange;
 
   return (
@@ -48,26 +35,7 @@ function App() {
 
       <BreakingBanner />
 
-      {/* In-page navigation — pinned to the top and always visible */}
-      <nav
-        aria-label={t.ui.sectionNav}
-        className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur"
-      >
-        <div className="mx-auto max-w-6xl overflow-x-auto px-4 sm:px-6">
-          <ul className="flex gap-1 py-2 text-sm">
-            {NAV.map((n) => (
-              <li key={n.id}>
-                <a
-                  href={`#${n.id}`}
-                  className="inline-block whitespace-nowrap rounded-md px-3 py-1 font-medium text-slate-600 hover:bg-slate-100 hover:text-brand-700"
-                >
-                  {n.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+      <SectionNav />
 
       <EmergencyBanner />
 
