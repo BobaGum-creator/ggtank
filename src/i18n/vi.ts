@@ -42,6 +42,8 @@ export const vi: Translation = {
     },
     lastUpdate: "Cập nhật dữ liệu lần cuối:",
     reportedNote: "Chỉ là số liệu được báo cáo — xem Nguồn & Giả định bên dưới.",
+    liveTempLabel: "Nhiệt độ bồn ước tính theo thời gian thực",
+    liveTempSub: "Ước tính trực tiếp (~1°F/giờ) — không phải phép đo; đồng hồ chỉ đo tối đa 100°F",
   },
 
   nav: {

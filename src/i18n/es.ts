@@ -43,6 +43,8 @@ export const es: Translation = {
     },
     lastUpdate: "Última actualización de datos:",
     reportedNote: "Solo cifras reportadas — vea Fuentes y supuestos más abajo.",
+    liveTempLabel: "Temperatura estimada del tanque en tiempo real",
+    liveTempSub: "Estimación en vivo (~1°F/h) — no es una medición; el manómetro llega como máximo a 100°F",
   },
 
   nav: {
