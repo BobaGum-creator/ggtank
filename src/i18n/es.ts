@@ -223,7 +223,7 @@ export const es: Translation = {
     hoursFromNow: "Horas a partir de ahora",
     nowEstimated: "ahora (estimado)",
     extrapolatedNote:
-      "El punto de inicio (~123°F) es una estimación extrapolada de la última lectura reportada de 90°F a ~1°F/h. El manómetro llega como máximo a 100°F, así que la temperatura actual no se mide directamente.",
+      "El punto de inicio es una estimación en vivo extrapolada de la última lectura reportada de 90°F a ~1°F/h — aumenta alrededor de 1°F cada hora. El manómetro llega como máximo a 100°F, así que la temperatura actual no se mide directamente.",
     illustrativeNote: (ceiling: number) =>
       `La curva roja discontinua es un escenario ilustrativo tipo descontrol, no una predicción. Está limitada a ${ceiling}°F y puede salirse de la parte superior del gráfico.`,
     legend: {

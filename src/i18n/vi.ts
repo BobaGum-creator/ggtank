@@ -222,7 +222,7 @@ export const vi: Translation = {
     hoursFromNow: "Số giờ kể từ bây giờ",
     nowEstimated: "hiện tại (ước tính)",
     extrapolatedNote:
-      "Điểm bắt đầu (~123°F) là ước tính ngoại suy từ số đo được báo cáo gần nhất 90°F ở mức ~1°F/giờ. Đồng hồ chỉ đo tối đa 100°F, nên nhiệt độ hiện tại không được đo trực tiếp.",
+      "Điểm bắt đầu là ước tính trực tiếp, ngoại suy từ số đo được báo cáo gần nhất 90°F ở mức ~1°F/giờ — tăng khoảng 1°F mỗi giờ. Đồng hồ chỉ đo tối đa 100°F, nên nhiệt độ hiện tại không được đo trực tiếp.",
     illustrativeNote: (ceiling: number) =>
       `Đường đỏ nét đứt là kịch bản minh họa kiểu mất kiểm soát, không phải dự đoán. Nó được giới hạn ở ${ceiling}°F và có thể vượt ra khỏi đỉnh biểu đồ.`,
     legend: {

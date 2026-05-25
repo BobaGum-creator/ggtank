@@ -9,6 +9,7 @@ import {
   energyEquivalentConversionFraction,
   estimateComposition,
   interpolateVaporPressurePsi,
+  liveEstimate,
   simulateTemperatureScenarios,
   thresholdCrossings,
   ratePerHour,
@@ -92,6 +93,19 @@ test("interpolateVaporPressurePsi hits table points and interpolates", () => {
     interpolateVaporPressurePsi(200),
     VAPOR_PRESSURE_TABLE[VAPOR_PRESSURE_TABLE.length - 1].psi,
   );
+});
+
+test("liveEstimate extrapolates from the anchor at 1°F/hr, clamped and capped", () => {
+  const anchorMs = new Date("2026-05-23T09:54:10-07:00").getTime();
+  const HOUR = 3_600_000;
+  // 10 hours after the anchor: 90 + 10 = 100°F
+  const e = liveEstimate(anchorMs + 10 * HOUR);
+  approx(e.elapsedHours, 10, 1e-6);
+  approx(e.currentTempF, 100, 1e-6);
+  // far in the future is capped at the boiling point (214°F)
+  assert.equal(liveEstimate(anchorMs + 100000 * HOUR).currentTempF, 214);
+  // before the anchor, elapsed clamps to 0 (stays at the anchor temperature)
+  approx(liveEstimate(anchorMs - 5 * HOUR).currentTempF, 90, 1e-6);
 });
 
 test("ratePerHour computes the observed slope, guards divide-by-zero", () => {
