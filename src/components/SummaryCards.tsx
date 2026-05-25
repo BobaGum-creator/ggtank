@@ -9,6 +9,7 @@ import {
   TEMPERATURE_THRESHOLDS,
 } from "../data/constants";
 import { observations, latestObservation } from "../data/observations";
+import { liveEstimate } from "../lib/model";
 import { useT } from "../i18n";
 
 export function SummaryCards() {
@@ -27,6 +28,13 @@ export function SummaryCards() {
   const tempTone = reachedThreshold?.severity ?? "neutral";
   const reachedLabel = reachedThreshold ? t.thresholds[reachedThreshold.tempF].label : undefined;
 
+  // Live extrapolated current temperature (recomputed per visit at ~1°F/hr).
+  const estimatedTempF = Math.round(liveEstimate().currentTempF);
+  const estReached = [...TEMPERATURE_THRESHOLDS]
+    .reverse()
+    .find((th) => estimatedTempF >= th.tempF);
+  const estTone = estReached?.severity ?? "neutral";
+
   const isMedium = observations.length >= 2;
   const confidence = isMedium ? t.summary.medium : t.summary.low;
 
@@ -34,12 +42,18 @@ export function SummaryCards() {
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Stat
           label={t.summary.reportedTemp}
           value={currentTempF != null ? `${currentTempF}°F${latest?.gaugeMax ? "+" : ""}` : "—"}
           sub={reachedLabel ? t.summary.atAbove(reachedLabel) : t.summary.belowThresholds}
           tone={tempTone}
+        />
+        <Stat
+          label={t.summary.estimatedTemp}
+          value={`~${estimatedTempF}°F`}
+          sub={t.summary.estimatedSub}
+          tone={estTone}
         />
         <Stat
           label={t.summary.reportedTrend}

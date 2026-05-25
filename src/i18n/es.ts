@@ -127,6 +127,8 @@ export const es: Translation = {
 
   summary: {
     reportedTemp: "Temp. interna reportada",
+    estimatedTemp: "Temp. estimada actual",
+    estimatedSub: "Estimación en vivo (~1°F/h)",
     atAbove: (label: string) => `En o por encima de: ${label}`,
     belowThresholds: "Por debajo de los umbrales listados",
     reportedTrend: "Tendencia reportada",

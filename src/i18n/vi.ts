@@ -126,6 +126,8 @@ export const vi: Translation = {
 
   summary: {
     reportedTemp: "Nhiệt độ trong được báo cáo",
+    estimatedTemp: "Nhiệt độ ước tính hiện tại",
+    estimatedSub: "Ước tính trực tiếp (~1°F/giờ)",
     atAbove: (label: string) => `Tại/trên: ${label}`,
     belowThresholds: "Dưới các ngưỡng đã liệt kê",
     reportedTrend: "Xu hướng được báo cáo",
