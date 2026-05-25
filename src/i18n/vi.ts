@@ -201,6 +201,11 @@ export const vi: Translation = {
         detail:
           "Đưa tin về các hành động ứng phó và bối cảnh sơ tán; theo báo cáo, việc giám sát không khí chưa phát hiện ô nhiễm ngoài khu vực vào thời điểm đó, nhưng cư dân được yêu cầu tuân theo lệnh sơ tán.",
       },
+      "crack-confirmed": {
+        title: "OCFA xác nhận có vết nứt trên bồn",
+        detail:
+          "OCFA đã xác nhận một vết nứt trên bồn. Một nhiệm vụ trinh sát suốt đêm Chủ nhật được lên lịch để kiểm tra xem áp suất đã được giải phóng hay chưa.",
+      },
     },
     wtmPre:
       "Đây là thời gian được báo cáo, lấy từ báo chí công khai và thông báo chính thức — chưa kiểm chứng độc lập, và giờ trong ngày là ước chừng trừ khi có thời điểm đo cụ thể. Thêm số đo mới trong ",
