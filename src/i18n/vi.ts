@@ -62,7 +62,7 @@ export const vi: Translation = {
       eyebrow: "Trình tự được báo cáo",
       title: "Dòng thời gian các dữ liệu được báo cáo",
       intro:
-        "Thời điểm xảy ra từng số đo nhiệt độ và sự kiện được báo cáo, theo thứ tự. Đây là thời gian được báo cáo từ các nguồn công khai, chưa được kiểm chứng độc lập.",
+        "Thời điểm xảy ra từng số đo nhiệt độ và sự kiện được báo cáo, mới nhất trước. Đây là thời gian được báo cáo từ các nguồn công khai, chưa được kiểm chứng độc lập.",
     },
     temperature: {
       eyebrow: "Mô hình kịch bản",

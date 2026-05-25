@@ -63,7 +63,7 @@ export const es: Translation = {
       eyebrow: "Cronología reportada",
       title: "Cronología de los datos reportados",
       intro:
-        "Cuándo ocurrió cada lectura de temperatura y evento reportado, en orden. Son horas reportadas por fuentes públicas, no verificadas de forma independiente.",
+        "Cuándo ocurrió cada lectura de temperatura y evento reportado, del más reciente al más antiguo. Son horas reportadas por fuentes públicas, no verificadas de forma independiente.",
     },
     temperature: {
       eyebrow: "Modelo de escenarios",
