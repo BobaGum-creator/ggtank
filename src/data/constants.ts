@@ -139,13 +139,6 @@ export const SEVERITY_COLORS: Record<TemperatureThreshold["severity"], string> =
 
 export const TEMPERATURE_THRESHOLDS: readonly TemperatureThreshold[] = [
   {
-    tempF: 85,
-    label: "Reported cooling target",
-    detail: "A key cooling target referenced in public reporting.",
-    severity: "info",
-    sourceId: "reuters",
-  },
-  {
     tempF: 86,
     label: "Preferred storage target",
     detail: "Below ~30°C / 86°F is a preferred storage target where practical.",

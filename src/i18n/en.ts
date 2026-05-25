@@ -237,7 +237,6 @@ export const en = {
   },
 
   thresholds: {
-    85: { label: "Reported cooling target", detail: "A key cooling target referenced in public reporting." },
     86: { label: "Preferred storage target", detail: "Below ~30°C / 86°F is a preferred storage target where practical." },
     95: { label: "BASF storage stability", detail: "BASF SDS lists storage stability below 35°C / 95°F." },
     104: { label: "Inhibitor-protection ceiling", detail: "Methacrylate-ester handling guidance: keep below 40°C / 104°F to help prevent stabilizer loss." },
