@@ -8,6 +8,7 @@ import { lastDataUpdate } from "../data/observations";
 import { formatTimestamp } from "../lib/format";
 import { LOCALES, useLanguage } from "../i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Collapsible } from "./ui";
 
 export function EmergencyBanner() {
   const { t, lang } = useLanguage();
@@ -38,29 +39,28 @@ export function EmergencyBanner() {
           <strong className="font-semibold">{t.banner.followOfficial}</strong>
         </div>
 
-        {/* Official channels strip */}
+        {/* Official channels strip (collapsible, collapsed by default) */}
         <nav aria-label={t.banner.officialHeading} className="mt-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            {t.banner.officialHeading}
-          </p>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {officialChannels.map((c) => (
-              <li key={c.name}>
-                <a
-                  href={c.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={t.banner.channelRoles[c.name] ?? c.role}
-                  className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:border-brand-600 hover:text-brand-700"
-                >
-                  {c.name}
-                  <span aria-hidden="true" className="text-slate-400">
-                    ↗
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <Collapsible title={t.banner.officialHeading}>
+            <ul className="flex flex-wrap gap-2">
+              {officialChannels.map((c) => (
+                <li key={c.name}>
+                  <a
+                    href={c.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={t.banner.channelRoles[c.name] ?? c.role}
+                    className="inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:border-brand-600 hover:text-brand-700"
+                  >
+                    {c.name}
+                    <span aria-hidden="true" className="text-slate-400">
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Collapsible>
         </nav>
 
         <p className="mt-4 text-xs text-slate-500">
