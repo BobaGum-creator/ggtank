@@ -56,6 +56,7 @@ export const en = {
     faq: "FAQ",
     glossary: "Glossary",
     sources: "Sources",
+    evacuation: "Evacuation",
   },
 
   sections: {
@@ -125,6 +126,12 @@ export const en = {
       title: "Sources & assumptions",
       intro:
         "Every fact, constant, and threshold traces back to a public source listed here.",
+    },
+    evacuation: {
+      eyebrow: "Evacuation",
+      title: "Evacuation zone map",
+      intro:
+        "A reported snapshot of the evacuation area. Boundaries and orders change — always confirm the current evacuation zone and instructions with OCFA and local officials.",
     },
   },
 
@@ -448,6 +455,24 @@ export const en = {
       { term: "Plume", def: "A cloud of vapor carried by the wind. Its path is shaped by wind, terrain, and buildings, so it is neither a straight line nor a perfect circle." },
       { term: "Restabilization", def: "Adding inhibitor back into a bulk tank to regain stability. Guidance flags this at about 45°C / 113°F." },
     ],
+  },
+
+  evacuation: {
+    ordersActive: "Evacuation orders active",
+    address: "GKN Aerospace / MMA leak — 12122 Western Ave, Garden Grove",
+    imageAlt:
+      "Reported evacuation-zone map for the GKN Aerospace MMA incident in Garden Grove, outlining the area roughly bounded by Ball Road, Valley View Street, Dale Street, and Trask Avenue.",
+    caption:
+      "Reported snapshot — not official guidance and possibly outdated. Confirm the current evacuation zone and orders with official sources.",
+    zoneHeading: "Reported zone boundaries",
+    boundaries: [
+      "South of Ball Road",
+      "East of Valley View St",
+      "West of Dale Street",
+      "North of Trask Avenue",
+    ],
+    wtm:
+      "This is a snapshot someone captured, not a live or official map — the real zone and orders can change at any time. For the current evacuation area and what to do, rely on",
   },
 
   share: {

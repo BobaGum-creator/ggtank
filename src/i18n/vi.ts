@@ -53,6 +53,7 @@ export const vi: Translation = {
     faq: "Hỏi đáp",
     glossary: "Thuật ngữ",
     sources: "Nguồn",
+    evacuation: "Sơ tán",
   },
 
   sections: {
@@ -114,6 +115,12 @@ export const vi: Translation = {
       title: "Nguồn & giả định",
       intro:
         "Mọi dữ kiện, hằng số và ngưỡng đều truy về một nguồn công khai được liệt kê tại đây.",
+    },
+    evacuation: {
+      eyebrow: "Sơ tán",
+      title: "Bản đồ khu vực sơ tán",
+      intro:
+        "Ảnh chụp nhanh được báo cáo về khu vực sơ tán. Ranh giới và lệnh có thể thay đổi — hãy luôn xác nhận khu vực sơ tán và chỉ dẫn hiện hành với OCFA và chính quyền địa phương.",
     },
   },
 
@@ -437,6 +444,24 @@ export const vi: Translation = {
       { term: "Luồng hơi", def: "Một đám hơi bị gió cuốn đi. Đường đi của nó phụ thuộc gió, địa hình và công trình, nên không phải đường thẳng cũng không phải vòng tròn hoàn hảo." },
       { term: "Tái ổn định", def: "Thêm chất ức chế trở lại bồn lớn để lấy lại sự ổn định. Hướng dẫn lưu ý điều này ở khoảng 45°C / 113°F." },
     ],
+  },
+
+  evacuation: {
+    ordersActive: "Lệnh sơ tán đang có hiệu lực",
+    address: "GKN Aerospace / rò rỉ MMA — 12122 Western Ave, Garden Grove",
+    imageAlt:
+      "Bản đồ khu vực sơ tán được báo cáo cho sự cố MMA tại GKN Aerospace ở Garden Grove, phác thảo khu vực giới hạn xấp xỉ bởi Ball Road, Valley View Street, Dale Street và Trask Avenue.",
+    caption:
+      "Ảnh chụp nhanh được báo cáo — không phải hướng dẫn chính thức và có thể đã lỗi thời. Hãy xác nhận khu vực sơ tán và các lệnh hiện hành với nguồn chính thức.",
+    zoneHeading: "Ranh giới khu vực được báo cáo",
+    boundaries: [
+      "Phía nam Ball Road",
+      "Phía đông Valley View St",
+      "Phía tây Dale Street",
+      "Phía bắc Trask Avenue",
+    ],
+    wtm:
+      "Đây là ảnh chụp nhanh do ai đó chụp lại, không phải bản đồ trực tiếp hay chính thức — khu vực và lệnh thực tế có thể thay đổi bất cứ lúc nào. Để biết khu vực sơ tán hiện tại và phải làm gì, hãy dựa vào",
   },
 
   share: {

@@ -10,6 +10,7 @@ import { KnownUnknowns } from "./components/KnownUnknowns";
 import { Faq } from "./components/Faq";
 import { Glossary } from "./components/Glossary";
 import { SourcesPanel } from "./components/SourcesPanel";
+import { EvacuationMap } from "./components/EvacuationMap";
 import { Section } from "./components/ui";
 import { ShareButtons } from "./components/ShareButtons";
 import { INCIDENT } from "./data/constants";
@@ -31,6 +32,7 @@ function App() {
     { id: "faq", label: t.nav.faq },
     { id: "glossary", label: t.nav.glossary },
     { id: "sources", label: t.nav.sources },
+    { id: "evacuation", label: t.nav.evacuation },
   ];
 
   const [volLo, volHi] = INCIDENT.reportedContentsGallonsRange;
@@ -166,6 +168,15 @@ function App() {
           intro={t.sections.sources.intro}
         >
           <SourcesPanel />
+        </Section>
+
+        <Section
+          id="evacuation"
+          eyebrow={t.sections.evacuation.eyebrow}
+          title={t.sections.evacuation.title}
+          intro={t.sections.evacuation.intro}
+        >
+          <EvacuationMap />
         </Section>
 
         {/* Share responsibly */}
