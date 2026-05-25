@@ -21,8 +21,8 @@ function App() {
 
   const NAV = [
     { id: "summary", label: t.nav.summary },
-    { id: "timeline", label: t.nav.timeline },
     { id: "temperature", label: t.nav.temperature },
+    { id: "timeline", label: t.nav.timeline },
     { id: "composition", label: t.nav.composition },
     { id: "pressure", label: t.nav.pressure },
     { id: "plume", label: t.nav.plume },
@@ -85,21 +85,21 @@ function App() {
         </Section>
 
         <Section
-          id="timeline"
-          eyebrow={t.sections.timeline.eyebrow}
-          title={t.sections.timeline.title}
-          intro={t.sections.timeline.intro}
-        >
-          <Timeline />
-        </Section>
-
-        <Section
           id="temperature"
           eyebrow={t.sections.temperature.eyebrow}
           title={t.sections.temperature.title}
           intro={t.sections.temperature.intro}
         >
           <TemperatureScenarioChart />
+        </Section>
+
+        <Section
+          id="timeline"
+          eyebrow={t.sections.timeline.eyebrow}
+          title={t.sections.timeline.title}
+          intro={t.sections.timeline.intro}
+        >
+          <Timeline />
         </Section>
 
         <Section
