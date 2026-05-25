@@ -161,7 +161,7 @@ export const en = {
     observationLabels: {
       "Earlier reported internal temperature": "Earlier reported internal temperature",
       "Reported internal gauge temperature": "Reported internal gauge temperature",
-      "Internal temperature reported over 100°F": "Internal temperature reported over 100°F",
+      "Internal temperature 100°F+ (the gauge maxes out at 100°F)": "Internal temperature 100°F+ (the gauge maxes out at 100°F)",
     } as Record<string, string>,
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP public reporting",

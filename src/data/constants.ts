@@ -203,7 +203,9 @@ export const VAPOR_PRESSURE_TABLE: readonly VaporPressurePoint[] = [
 export const SCENARIO_DEFAULTS = {
   startTempF: 100,
   previousTempF: 90,
-  hoursBetweenReadings: 53,
+  // Assume the ~1°F/hr rise reported since reaching 90°F continues: 90 -> 100
+  // at 1°F/hr is a 10-hour span, so the auto-rate resolves to 1°F/hr.
+  hoursBetweenReadings: 10,
   ambientTempF: 70,
   /** 0–100 slider. Higher = cooling damps the rising rate faster. */
   coolingEffectiveness: 40,
