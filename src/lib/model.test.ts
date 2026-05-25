@@ -116,6 +116,24 @@ test("simulateTemperatureScenarios: linear is exact; cooling <= linear", () => {
   assert.ok(at12.cooling <= at12.linear + 1e-9);
 });
 
+test("accelerating curve never dips below linear (or cooling)", () => {
+  const { points } = simulateTemperatureScenarios({
+    startTempF: 123, // far above ambient, where the cooling-loss term is large
+    rateFPerHour: 1,
+    ambientTempF: 70,
+    coolingEffectiveness: 0.4,
+    accelerationFactor: 0.05,
+    horizonHours: 24,
+  });
+  for (const p of points) {
+    assert.ok(
+      p.accelerating >= p.linear - 1e-9,
+      `accelerating ${p.accelerating} < linear ${p.linear} at hour ${p.hour}`,
+    );
+    assert.ok(p.accelerating >= p.cooling - 1e-9);
+  }
+});
+
 test("zero cooling effectiveness makes cooling == linear", () => {
   const { points } = simulateTemperatureScenarios({
     startTempF: 90,

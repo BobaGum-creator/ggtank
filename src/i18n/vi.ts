@@ -122,6 +122,7 @@ export const vi: Translation = {
     atAbove: (label: string) => `Tại/trên: ${label}`,
     belowThresholds: "Dưới các ngưỡng đã liệt kê",
     reportedTrend: "Xu hướng được báo cáo",
+    reportedRateSub: "Tốc độ tăng được báo cáo (~1°F/giờ)",
     fromTwoReadings: "Từ hai số đo được báo cáo gần nhất",
     needTwo: "Cần ≥2 số đo",
     estVolume: "Thể tích MMA ước tính",

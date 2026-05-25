@@ -133,6 +133,7 @@ export const en = {
     atAbove: (label: string) => `At/above: ${label}`,
     belowThresholds: "Below listed thresholds",
     reportedTrend: "Reported trend",
+    reportedRateSub: "Reported rate of rise (~1°F/hr)",
     fromTwoReadings: "From last two reported readings",
     needTwo: "Need ≥2 readings",
     estVolume: "Estimated MMA volume",

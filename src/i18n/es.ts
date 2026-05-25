@@ -123,6 +123,7 @@ export const es: Translation = {
     atAbove: (label: string) => `En o por encima de: ${label}`,
     belowThresholds: "Por debajo de los umbrales listados",
     reportedTrend: "Tendencia reportada",
+    reportedRateSub: "Tasa de aumento reportada (~1°F/h)",
     fromTwoReadings: "De las dos últimas lecturas reportadas",
     needTwo: "Se necesitan ≥2 lecturas",
     estVolume: "Volumen estimado de MMA",
