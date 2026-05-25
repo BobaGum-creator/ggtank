@@ -27,7 +27,7 @@
  * Nothing else in the codebase needs to change when you add a reading.
  */
 
-export type ObservationConfidence = "reported" | "estimated" | "official";
+export type ObservationConfidence = "reported" | "estimated" | "official" | "unconfirmed";
 
 export interface Observation {
   /** ISO 8601 timestamp, Pacific time, e.g. "2026-05-23T13:00:00-07:00". */
@@ -56,6 +56,13 @@ export const observations: readonly Observation[] = [
     tempF: 90,
     source: "Reuters public reporting",
     confidence: "reported",
+  },
+  {
+    timestamp: "2026-05-25T18:20:00-07:00",
+    label: "Reported above the 100°F gauge maximum (no longer readable)",
+    tempF: 100,
+    source: "ABC7 reporting (relayed, unconfirmed by OCFA)",
+    confidence: "unconfirmed",
   },
 ];
 
