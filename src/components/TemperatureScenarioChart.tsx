@@ -18,11 +18,14 @@ import {
   YAxis,
 } from "recharts";
 import {
+  ESTIMATE_ANCHOR,
+  ESTIMATE_CAP_F,
   SCENARIO_DEFAULTS,
   SEVERITY_COLORS,
   TEMPERATURE_THRESHOLDS,
 } from "../data/constants";
 import {
+  liveEstimate,
   ratePerHour,
   simulateTemperatureScenarios,
   thresholdCrossings,
@@ -44,9 +47,19 @@ export function TemperatureScenarioChart() {
   const { t, lang } = useLanguage();
   // Restore a shared scenario from the URL on first load (falls back to defaults).
   const [initial] = useState(() => parseScenarioParams(window.location.search));
-  const [startTempF, setStartTempF] = useState<number>(initial.start ?? SCENARIO_DEFAULTS.startTempF);
-  const [previousTempF, setPreviousTempF] = useState<number>(initial.prev ?? SCENARIO_DEFAULTS.previousTempF);
-  const [hoursBetween, setHoursBetween] = useState<number>(initial.hrs ?? SCENARIO_DEFAULTS.hoursBetweenReadings);
+  // Live defaults derived from the anchor reading at the reported rate, computed
+  // once per visit so the starting "now" temperature ticks up over time.
+  const [live] = useState(() => {
+    const hrs = Math.max(1, Math.round(liveEstimate().elapsedHours));
+    return {
+      startTempF: Math.min(ESTIMATE_ANCHOR.tempF + hrs, ESTIMATE_CAP_F),
+      previousTempF: ESTIMATE_ANCHOR.tempF,
+      hoursBetween: hrs,
+    };
+  });
+  const [startTempF, setStartTempF] = useState<number>(initial.start ?? live.startTempF);
+  const [previousTempF, setPreviousTempF] = useState<number>(initial.prev ?? live.previousTempF);
+  const [hoursBetween, setHoursBetween] = useState<number>(initial.hrs ?? live.hoursBetween);
   const [coolingPct, setCoolingPct] = useState<number>(initial.cool ?? SCENARIO_DEFAULTS.coolingEffectiveness);
   const [accelerationFactor, setAccelerationFactor] = useState<number>(initial.acc ?? SCENARIO_DEFAULTS.accelerationFactor);
   const [horizon, setHorizon] = useState<number>(initial.hz ?? SCENARIO_DEFAULTS.defaultHorizonHours);
@@ -74,9 +87,9 @@ export function TemperatureScenarioChart() {
   };
 
   const resetDefaults = () => {
-    setStartTempF(SCENARIO_DEFAULTS.startTempF);
-    setPreviousTempF(SCENARIO_DEFAULTS.previousTempF);
-    setHoursBetween(SCENARIO_DEFAULTS.hoursBetweenReadings);
+    setStartTempF(live.startTempF);
+    setPreviousTempF(live.previousTempF);
+    setHoursBetween(live.hoursBetween);
     setCoolingPct(SCENARIO_DEFAULTS.coolingEffectiveness);
     setAccelerationFactor(SCENARIO_DEFAULTS.accelerationFactor);
     setHorizon(SCENARIO_DEFAULTS.defaultHorizonHours);
@@ -84,9 +97,9 @@ export function TemperatureScenarioChart() {
   };
 
   const isDirty =
-    startTempF !== SCENARIO_DEFAULTS.startTempF ||
-    previousTempF !== SCENARIO_DEFAULTS.previousTempF ||
-    hoursBetween !== SCENARIO_DEFAULTS.hoursBetweenReadings ||
+    startTempF !== live.startTempF ||
+    previousTempF !== live.previousTempF ||
+    hoursBetween !== live.hoursBetween ||
     coolingPct !== SCENARIO_DEFAULTS.coolingEffectiveness ||
     accelerationFactor !== SCENARIO_DEFAULTS.accelerationFactor ||
     horizon !== SCENARIO_DEFAULTS.defaultHorizonHours ||

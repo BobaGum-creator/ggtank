@@ -233,7 +233,7 @@ export const en = {
     hoursFromNow: "Hours from now",
     nowEstimated: "now (estimated)",
     extrapolatedNote:
-      "The starting point (~123°F) is an estimate extrapolated from the last reported 90°F at ~1°F/hr. The gauge maxes out at 100°F, so the current temperature is not directly measured.",
+      "The starting point is a live estimate extrapolated from the last reported 90°F at ~1°F/hr — it ticks up about 1°F each hour. The gauge maxes out at 100°F, so the current temperature is not directly measured.",
     illustrativeNote: (ceiling: number) =>
       `The dashed red curve is an illustrative runaway-like scenario, not a prediction. It is capped at ${ceiling}°F and may run off the top of the chart.`,
     legend: {

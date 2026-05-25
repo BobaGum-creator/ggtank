@@ -14,7 +14,7 @@ import {
   MMA_HEAT_OF_POLYMERIZATION_KJ_PER_MOL,
   VOLUME_DEFAULTS_GALLONS,
 } from "../data/constants";
-import { estimateComposition } from "../lib/model";
+import { estimateComposition, liveEstimate } from "../lib/model";
 import { clamp, formatEnergy, formatPercent } from "../lib/units";
 import { useT } from "../i18n";
 import { AssumptionControl } from "./AssumptionControl";
@@ -36,7 +36,7 @@ export function CompositionEstimator() {
   const [density, setDensity] = useState<number>(MMA_DENSITY_KG_PER_L.value);
   const [cp, setCp] = useState<number>(MMA_CP_KJ_PER_KG_K.value);
   const [initialTempF, setInitialTempF] = useState<number>(COMPOSITION_DEFAULTS.initialTempF);
-  const [currentTempF, setCurrentTempF] = useState<number>(COMPOSITION_DEFAULTS.currentTempF);
+  const [currentTempF, setCurrentTempF] = useState<number>(() => Math.round(liveEstimate().currentTempF));
   const [coolingMult, setCoolingMult] = useState<number>(COMPOSITION_DEFAULTS.coolingRemovalMultiplier);
 
   const base = useMemo(

@@ -200,14 +200,24 @@ export const VAPOR_PRESSURE_TABLE: readonly VaporPressurePoint[] = [
 // Temperature-scenario model defaults
 // -----------------------------------------------------------------------------
 
+// -----------------------------------------------------------------------------
+// Live current-temperature estimate
+// -----------------------------------------------------------------------------
+
+/** Anchor for the live estimate: the last reported reading with a precise time
+ *  (OCFA Critical Incident Update, 90°F). The current temperature is extrapolated
+ *  from here at the reported rate (~1°F/hr), recomputed on each visit. */
+export const ESTIMATE_ANCHOR = {
+  tempF: 90,
+  timestamp: "2026-05-23T09:54:10-07:00",
+} as const;
+
+/** The live estimate is capped here (MMA's boiling point) — a constant-rate
+ *  linear extrapolation is meaningless beyond it, and this prevents a stale page
+ *  from showing absurd values. °F. */
+export const ESTIMATE_CAP_F = 214;
+
 export const SCENARIO_DEFAULTS = {
-  // ESTIMATED current temperature, extrapolated from the last reported 90°F at
-  // ~1°F/hr. The gauge maxes out at 100°F, so this is not a direct measurement.
-  startTempF: 123,
-  previousTempF: 90,
-  // 90°F (reported, May 23) -> ~123°F (estimated, ~7 PM May 24) is ~33 hours at
-  // ~1°F/hr, so the auto-rate resolves to 1°F/hr.
-  hoursBetweenReadings: 33,
   /** 0–100 slider. Higher = cooling damps the rising rate faster. */
   coolingEffectiveness: 40,
   /** 0–0.2 per hour. Drives the illustrative accelerating scenario only. */
@@ -227,8 +237,6 @@ export const SCENARIO_DEFAULTS = {
 
 export const COMPOSITION_DEFAULTS = {
   initialTempF: 77,
-  // Estimated current temperature (~123°F, extrapolated at ~1°F/hr; gauge maxes at 100°F).
-  currentTempF: 123,
   /** 1x = purely adiabatic (no heat removed). Higher = more unmeasured heat
    *  assumed removed by cooling before it showed up as a temperature rise. */
   coolingRemovalMultiplier: 1,

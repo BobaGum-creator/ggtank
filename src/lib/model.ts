@@ -10,6 +10,9 @@
  */
 
 import {
+  ESTIMATE_ANCHOR,
+  ESTIMATE_CAP_F,
+  INCIDENT,
   MMA_HEAT_OF_POLYMERIZATION_J_PER_MOL,
   MMA_MOLAR_MASS_KG_PER_MOL,
   SCENARIO_DEFAULTS,
@@ -299,6 +302,25 @@ export function thresholdCrossings(
       hour: hit ? hit.hour : null,
     };
   });
+}
+
+export interface LiveEstimate {
+  /** Estimated current temperature (°F), capped at the boiling point. */
+  currentTempF: number;
+  /** Hours elapsed since the anchor reading. */
+  elapsedHours: number;
+}
+
+/**
+ * Live current-temperature estimate: anchor reading + reported rate × elapsed
+ * time, recomputed at call time so each visit reflects "now". Capped at the
+ * boiling point. This is an extrapolation, NOT a measurement.
+ */
+export function liveEstimate(nowMs: number = Date.now()): LiveEstimate {
+  const anchorMs = new Date(ESTIMATE_ANCHOR.timestamp).getTime();
+  const elapsedHours = Math.max(0, (nowMs - anchorMs) / 3_600_000);
+  const raw = ESTIMATE_ANCHOR.tempF + INCIDENT.reportedRateFPerHour * elapsedHours;
+  return { currentTempF: Math.min(raw, ESTIMATE_CAP_F), elapsedHours };
 }
 
 /** Auto-calculated rate of rise between two readings, °F/hour. */
