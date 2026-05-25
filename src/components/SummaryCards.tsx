@@ -43,7 +43,7 @@ export function SummaryCards() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <Stat
           label={t.summary.reportedTemp}
-          value={currentTempF != null ? `${currentTempF}°F` : "—"}
+          value={currentTempF != null ? `${currentTempF}°F${latest?.gaugeMax ? "+" : ""}` : "—"}
           sub={reachedLabel ? t.summary.atAbove(reachedLabel) : t.summary.belowThresholds}
           tone={tempTone}
         />

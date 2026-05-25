@@ -150,7 +150,7 @@ export const vi: Translation = {
     observationLabels: {
       "Earlier reported internal temperature": "Nhiệt độ trong được báo cáo trước đó",
       "Reported internal gauge temperature": "Nhiệt độ đồng hồ trong được báo cáo",
-      "Internal temperature reported over 100°F": "Nhiệt độ bên trong được báo cáo trên 100°F",
+      "Internal temperature 100°F+ (the gauge maxes out at 100°F)": "Nhiệt độ bên trong 100°F+ (đồng hồ chỉ đo tối đa 100°F)",
     },
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP, báo chí công khai",

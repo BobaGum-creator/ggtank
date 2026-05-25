@@ -151,7 +151,7 @@ export const es: Translation = {
     observationLabels: {
       "Earlier reported internal temperature": "Temperatura interna reportada anterior",
       "Reported internal gauge temperature": "Temperatura reportada del manómetro interno",
-      "Internal temperature reported over 100°F": "Temperatura interna reportada por encima de 100°F",
+      "Internal temperature 100°F+ (the gauge maxes out at 100°F)": "Temperatura interna 100°F+ (el manómetro llega como máximo a 100°F)",
     },
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP, reportes públicos",

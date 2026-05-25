@@ -55,7 +55,7 @@ export function Timeline() {
       ms: new Date(o.timestamp).getTime(),
       when: formatTimestamp(o.timestamp, locale),
       kind: "reading",
-      title: t.timeline.readingTitle(o.tempF),
+      title: t.timeline.readingTitle(o.tempF) + (o.gaugeMax ? "+" : ""),
       detail: t.timeline.observationLabels[o.label] ?? o.label,
       sourceLabel: t.timeline.observationSources[o.source] ?? o.source,
       confidence: t.timeline.confidence[o.confidence] ?? o.confidence,

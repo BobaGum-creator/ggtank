@@ -40,6 +40,9 @@ export interface Observation {
   readonly source: string;
   /** How much weight to give this figure. */
   readonly confidence: ObservationConfidence;
+  /** True when the gauge has maxed out, so the real value is this figure OR HIGHER
+   *  (rendered with a trailing "+", e.g. "100°F+"). */
+  readonly gaugeMax?: boolean;
 }
 
 export const observations: readonly Observation[] = [
@@ -59,10 +62,11 @@ export const observations: readonly Observation[] = [
   },
   {
     timestamp: "2026-05-24T18:10:00-07:00",
-    label: "Internal temperature reported over 100°F",
+    label: "Internal temperature 100°F+ (the gauge maxes out at 100°F)",
     tempF: 100,
     source: "ABC7 (KABC), citing OCFA",
     confidence: "reported",
+    gaugeMax: true,
   },
 ];
 
