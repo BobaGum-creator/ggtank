@@ -45,6 +45,8 @@ export const en = {
     } as Record<string, string>,
     lastUpdate: "Last data update:",
     reportedNote: "Reported figures only — see Sources & Assumptions below.",
+    liveTempLabel: "Real-time estimated tank temperature",
+    liveTempSub: "Live estimate (~1°F/hr) — not a measurement; the gauge maxes at 100°F",
   },
 
   nav: {

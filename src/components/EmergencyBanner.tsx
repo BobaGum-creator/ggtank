@@ -4,15 +4,17 @@
  * and the "Last data update" timestamp pulled from observations.
  */
 import { officialChannels } from "../data/sources";
-import { lastDataUpdate } from "../data/observations";
 import { formatTimestamp } from "../lib/format";
+import { liveEstimate } from "../lib/model";
 import { LOCALES, useLanguage } from "../i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Collapsible } from "./ui";
 
 export function EmergencyBanner() {
   const { t, lang } = useLanguage();
-  const updated = formatTimestamp(lastDataUpdate(), LOCALES[lang]);
+  const nowIso = new Date().toISOString();
+  const updated = formatTimestamp(nowIso, LOCALES[lang]);
+  const estimatedTempF = Math.round(liveEstimate().currentTempF);
 
   return (
     <header className="border-b border-slate-200 bg-white">
@@ -65,11 +67,22 @@ export function EmergencyBanner() {
 
         <p className="mt-4 text-xs text-slate-500">
           {t.banner.lastUpdate}{" "}
-          <time dateTime={lastDataUpdate()} className="font-medium text-slate-700">
+          <time dateTime={nowIso} className="font-medium text-slate-700">
             {updated}
           </time>{" "}
           · {t.banner.reportedNote}
         </p>
+
+        {/* Real-time estimated tank temperature (live extrapolation, not a measurement) */}
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            {t.banner.liveTempLabel}
+          </p>
+          <div className="mt-0.5 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <span className="text-3xl font-bold text-amber-600">~{estimatedTempF}°F</span>
+            <span className="text-xs text-slate-500">{t.banner.liveTempSub}</span>
+          </div>
+        </div>
       </div>
     </header>
   );
