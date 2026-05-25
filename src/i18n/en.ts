@@ -137,6 +137,8 @@ export const en = {
 
   summary: {
     reportedTemp: "Reported internal temp",
+    estimatedTemp: "Current estimated temp",
+    estimatedSub: "Live estimate (~1°F/hr)",
     atAbove: (label: string) => `At/above: ${label}`,
     belowThresholds: "Below listed thresholds",
     reportedTrend: "Reported trend",
