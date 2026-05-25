@@ -73,7 +73,7 @@ export const en = {
       eyebrow: "Reported chronology",
       title: "Timeline of reported data points",
       intro:
-        "When each reported temperature reading and incident event occurred, in order. These are reported times from public sources, not independently verified.",
+        "When each reported temperature reading and incident event occurred, most recent first. These are reported times from public sources, not independently verified.",
     },
     temperature: {
       eyebrow: "Scenario model",

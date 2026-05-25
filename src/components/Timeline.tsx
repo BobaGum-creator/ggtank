@@ -76,7 +76,8 @@ export function Timeline() {
     });
   }
 
-  rows.sort((a, b) => a.ms - b.ms);
+  // Most recent first; the initial incident report ends up at the bottom.
+  rows.sort((a, b) => b.ms - a.ms);
 
   return (
     <Card>
