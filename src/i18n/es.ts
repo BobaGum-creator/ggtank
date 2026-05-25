@@ -21,6 +21,10 @@ export const es: Translation = {
     approxHours: (h: number) => `~${h} h`,
   },
 
+  breaking: {
+    label: "Última hora",
+  },
+
   banner: {
     subtitle: "Una estimación transparente, no orientación oficial.",
     importantLabel: "Importante:",

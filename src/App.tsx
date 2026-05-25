@@ -1,3 +1,4 @@
+import { BreakingBanner } from "./components/BreakingBanner";
 import { EmergencyBanner } from "./components/EmergencyBanner";
 import { SummaryCards } from "./components/SummaryCards";
 import { Timeline } from "./components/Timeline";
@@ -42,6 +43,8 @@ function App() {
       >
         {t.ui.skipToContent}
       </a>
+
+      <BreakingBanner />
 
       {/* In-page navigation — pinned to the top and always visible */}
       <nav
