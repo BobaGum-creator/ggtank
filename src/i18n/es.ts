@@ -155,7 +155,7 @@ export const es: Translation = {
     },
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP, reportes públicos",
-      "Reuters public reporting": "Reuters, reportes públicos",
+      "OCFA Critical Incident Update (Chief Covey), via NBC LA": "Actualización de incidente crítico de OCFA (jefe Covey), vía NBC LA",
       "ABC7 (KABC), citing OCFA": "ABC7 (KABC), citando a OCFA",
     },
     confidence: {

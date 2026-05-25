@@ -165,7 +165,7 @@ export const en = {
     } as Record<string, string>,
     observationSources: {
       "Reuters/AP public reporting": "Reuters/AP public reporting",
-      "Reuters public reporting": "Reuters public reporting",
+      "OCFA Critical Incident Update (Chief Covey), via NBC LA": "OCFA Critical Incident Update (Chief Covey), via NBC LA",
       "ABC7 (KABC), citing OCFA": "ABC7 (KABC), citing OCFA",
     } as Record<string, string>,
     confidence: {
