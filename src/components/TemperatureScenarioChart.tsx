@@ -126,9 +126,9 @@ export function TemperatureScenarioChart() {
 
   return (
     <Card>
-      <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+      <div className="flex flex-col gap-6">
         {/* Controls */}
-        <div className="min-w-0 space-y-4">
+        <div className="min-w-0">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-slate-900">{t.temperature.assumptions}</h3>
             <button
@@ -140,6 +140,7 @@ export function TemperatureScenarioChart() {
               <span aria-hidden="true">↺</span> {t.ui.reset}
             </button>
           </div>
+          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
           <AssumptionControl
             label={t.temperature.startTemp}
             value={startTempF}
@@ -240,10 +241,11 @@ export function TemperatureScenarioChart() {
               ))}
             </div>
           </div>
+          </div>
         </div>
 
         {/* Chart */}
-        <div className="min-w-0">
+        <div className="min-w-0 order-first">
           <div className="h-[420px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={points} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
