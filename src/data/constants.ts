@@ -201,11 +201,13 @@ export const VAPOR_PRESSURE_TABLE: readonly VaporPressurePoint[] = [
 // -----------------------------------------------------------------------------
 
 export const SCENARIO_DEFAULTS = {
-  startTempF: 100,
+  // ESTIMATED current temperature, extrapolated from the last reported 90°F at
+  // ~1°F/hr. The gauge maxes out at 100°F, so this is not a direct measurement.
+  startTempF: 123,
   previousTempF: 90,
-  // Assume the ~1°F/hr rise reported since reaching 90°F continues: 90 -> 100
-  // at 1°F/hr is a 10-hour span, so the auto-rate resolves to 1°F/hr.
-  hoursBetweenReadings: 10,
+  // 90°F (reported, May 23) -> ~123°F (estimated, ~7 PM May 24) is ~33 hours at
+  // ~1°F/hr, so the auto-rate resolves to 1°F/hr.
+  hoursBetweenReadings: 33,
   ambientTempF: 70,
   /** 0–100 slider. Higher = cooling damps the rising rate faster. */
   coolingEffectiveness: 40,
@@ -229,7 +231,8 @@ export const SCENARIO_DEFAULTS = {
 
 export const COMPOSITION_DEFAULTS = {
   initialTempF: 77,
-  currentTempF: 90,
+  // Estimated current temperature (~123°F, extrapolated at ~1°F/hr; gauge maxes at 100°F).
+  currentTempF: 123,
   /** 1x = purely adiabatic (no heat removed). Higher = more unmeasured heat
    *  assumed removed by cooling before it showed up as a temperature rise. */
   coolingRemovalMultiplier: 1,
